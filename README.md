@@ -9,7 +9,7 @@ AutoHarness is a package-first CLI for reproducible action-verifier experiments.
 
 It is inspired by the AutoHarness paper: [Lou et al., "AutoHarness: improving LLM agents by automatically synthesizing a code harness"](https://arxiv.org/abs/2603.03329). This repository is a clean-room scaffold for verifier-first experimentation; it does not claim paper-scale parity.
 
-## First Green Run
+## Quickstart
 
 ```bash
 git clone https://github.com/wx-b/autoharness.git
