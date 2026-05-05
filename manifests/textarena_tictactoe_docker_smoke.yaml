@@ -1,0 +1,22 @@
+version: "1"
+requirements:
+  - REQ-001-bootstrap-001
+  - REQ-001-bootstrap-002
+  - REQ-001-bootstrap-003
+provider:
+  kind: candidate
+  model: candidate-docker
+  path: ../tests/fixtures/candidates/ttt_first_available.py
+  use_docker: true
+  sandbox_image: python:3.12-alpine
+benchmark:
+  kind: textarena
+  env_id: TicTacToe-v0
+  num_players: 2
+  seed: 7
+  strip_available_moves: false
+runtime:
+  retry_limit: 2
+  prompt_prefix: "Return only the action."
+artifacts:
+  root: ../artifacts/textarena-tictactoe-docker-smoke

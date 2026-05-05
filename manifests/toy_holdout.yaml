@@ -1,0 +1,28 @@
+version: "1"
+requirements:
+  - REQ-001-bootstrap-002
+  - REQ-001-bootstrap-003
+  - REQ-001-bootstrap-005
+provider:
+  kind: fixture
+  model: fixture-model
+  sequence:
+    - alpha
+    - gamma
+benchmark:
+  kind: fixture
+  script:
+    - observation: "Legal Actions: 'alpha'"
+      valid_actions:
+        - alpha
+    - observation: "Legal Actions: 'gamma'"
+      valid_actions:
+        - gamma
+runtime:
+  retry_limit: 0
+  prompt_prefix: "Return only the action."
+verification:
+  deterministic_runs: 2
+  min_legal_action_rate: 1.0
+artifacts:
+  root: ../artifacts/toy-holdout

@@ -1,0 +1,26 @@
+version: "1"
+requirements:
+  - REQ-002-suite-refinement-001
+  - REQ-002-suite-refinement-003
+provider:
+  kind: fixture
+benchmark:
+  kind: fixture
+  cases:
+    - case_id: holdout-a
+      observation: |
+        [GAME] Current Board:
+         0 | 1 | 2
+        Available Moves: '[0]', '[1]', '[2]'
+        [Player 0] [0]
+        [GAME] Current Board:
+         O | 1 | 2
+        Available Moves: '[1]', '[2]'
+      valid_actions:
+        - "[1]"
+        - "[2]"
+runtime:
+  retry_limit: 1
+  prompt_prefix: "Return only the action."
+artifacts:
+  root: ../artifacts/toy-refinement-holdout

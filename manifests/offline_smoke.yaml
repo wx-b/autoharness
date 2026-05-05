@@ -1,0 +1,22 @@
+version: "1"
+requirements:
+  - REQ-001-bootstrap-002
+  - REQ-001-bootstrap-003
+  - REQ-001-bootstrap-004
+provider:
+  kind: fixture
+  model: fixture-model
+  sequence:
+    - right
+    - left
+benchmark:
+  kind: fixture
+  observation: "Choose a legal action: left"
+  valid_actions:
+    - left
+  max_steps: 1
+runtime:
+  retry_limit: 2
+  prompt_prefix: "Return only the action."
+artifacts:
+  root: ../artifacts/offline-smoke

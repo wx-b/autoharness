@@ -1,0 +1,129 @@
+version: "1"
+requirements:
+  - REQ-003-toy-benchmarking-003
+  - REQ-004-expanded-toy-benchmarking-artifact-policy-002
+  - REQ-004-expanded-toy-benchmarking-artifact-policy-009
+provider:
+  kind: fixture
+benchmark:
+  kind: fixture
+  cases:
+    - case_id: stale-history-holdout-a
+      observation: |
+        Available Moves: '[11]', '[12]'
+        [Player 1] [11]
+        Available Moves: '[12]'
+      valid_actions:
+        - "[12]"
+    - case_id: stale-history-holdout-b
+      observation: |
+        Available Moves: '[13]', '[14]', '[15]'
+        [Player 0] [13]
+        Available Moves: '[14]', '[15]'
+      valid_actions:
+        - "[14]"
+    - case_id: stale-history-holdout-c
+      observation: |
+        Available Moves: '[25]', '[26]', '[27]'
+        [Player 1] [25]
+        [Player 0] [26]
+        Available Moves: '[27]'
+      valid_actions:
+        - "[27]"
+    - case_id: exact-format-holdout-a
+      observation: "Available Moves: '[16]'"
+      valid_actions:
+        - "[16]"
+    - case_id: exact-format-holdout-b
+      observation: "Available Moves: '[28]', '[29]'"
+      valid_actions:
+        - "[28]"
+    - case_id: exact-format-holdout-c
+      observation: "Available Moves: '[30]', '[31]', '[32]'"
+      valid_actions:
+        - "[30]"
+    - case_id: retry-sensitive-holdout-a
+      observation: "Available Moves: '[17]', '[18]'"
+      valid_actions:
+        - "[17]"
+    - case_id: retry-sensitive-holdout-b
+      observation: "Available Moves: '[33]'"
+      valid_actions:
+        - "[33]"
+    - case_id: retry-sensitive-holdout-c
+      observation: "Available Moves: '[34]', '[35]'"
+      valid_actions:
+        - "[34]"
+    - case_id: scripted-holdout-a
+      observation: "Available Moves: [19], [20]"
+      valid_actions:
+        - "[19]"
+      max_steps: 2
+      script:
+        - observation: "Available Moves: [19], [20]"
+          valid_actions:
+            - "[19]"
+        - observation: |
+            Available Moves: '[19]', '[21]'
+            [Player 0] [19]
+            Available Moves: '[21]'
+          valid_actions:
+            - "[21]"
+    - case_id: scripted-holdout-b
+      observation: "Available Moves: [22], [23]"
+      valid_actions:
+        - "[22]"
+      max_steps: 2
+      script:
+        - observation: "Available Moves: [22], [23]"
+          valid_actions:
+            - "[22]"
+        - observation: "Available Moves: '[24]'"
+          valid_actions:
+            - "[24]"
+    - case_id: scripted-holdout-c
+      observation: "Available Moves: [36], [37]"
+      valid_actions:
+        - "[36]"
+      max_steps: 2
+      script:
+        - observation: "Available Moves: [36], [37]"
+          valid_actions:
+            - "[36]"
+        - observation: |
+            Available Moves: '[36]', '[38]'
+            [Player 0] [36]
+            Available Moves: '[38]'
+          valid_actions:
+            - "[38]"
+    - case_id: whitespace-format-holdout-a
+      observation: "Available Moves:    '[39]'"
+      valid_actions:
+        - "[39]"
+    - case_id: whitespace-format-holdout-b
+      observation: "Available Moves:\t'[40]', '[41]'"
+      valid_actions:
+        - "[40]"
+    - case_id: whitespace-format-holdout-c
+      observation: |
+        Available Moves:
+          '[42]', '[43]'
+      valid_actions:
+        - "[42]"
+    - case_id: alias-family-holdout-a
+      observation: "Legal Actions: '[44]', '[45]'"
+      valid_actions:
+        - "[44]"
+    - case_id: alias-family-holdout-b
+      observation: "Available Actions: '[46]'"
+      valid_actions:
+        - "[46]"
+    - case_id: alias-family-holdout-c
+      observation: "Valid Actions: '[47]', '[48]'"
+      valid_actions:
+        - "[47]"
+runtime:
+  retry_limit: 1
+  prompt_prefix: "Return only the action."
+artifacts:
+  root: ../artifacts/toy-benchmark-holdout

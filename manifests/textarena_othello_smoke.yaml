@@ -1,0 +1,25 @@
+version: "1"
+requirements:
+  - REQ-005-low-cost-textarena-smoke-expansion-004
+  - REQ-005-low-cost-textarena-smoke-expansion-006
+  - REQ-005-low-cost-textarena-smoke-expansion-009
+provider:
+  kind: candidate
+  model: candidate-module
+  path: ../tests/fixtures/candidates/textarena_first_listed_action.py
+benchmark:
+  kind: textarena
+  env_id: Othello-v0
+  num_players: 2
+  seed: 7
+  strip_available_moves: false
+  options:
+    board_size: 4
+    show_valid: true
+runtime:
+  retry_limit: 2
+  prompt_prefix: "Return only the action."
+verification:
+  min_legal_action_rate: 1.0
+artifacts:
+  root: ../artifacts/textarena-othello-smoke

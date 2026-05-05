@@ -1,0 +1,117 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editor / IDE
+.idea/
+*.iml
+*.swp
+*.swo
+*~
+
+# Local scratch (notes, PDFs, downloads - not canonical repo content)
+/notepads/
+
+# Secrets and local env (keep examples committed explicitly if needed)
+.env
+.env.local
+.env.*.local
+.envrc
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+htmlcov/
+.coverage
+coverage.xml
+*.cover
+.hypothesis/
+
+# Node / Bun / frontend-style builds
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.next/
+out/
+.nuxt/
+.turbo/
+.vercel/
+*.tsbuildinfo
+
+# Go (local binaries / test artifacts)
+bin/
+*.exe
+*.test
+*.out
+
+# Rust
+target/
+**/*.rs.bk
+
+# Logs and ephemeral dirs
+*.log
+/tmp/
+/artifacts/
+/generated/
+/temp/
+.cache/
+
+# Merge / patch leftovers
+*.orig
+
+# wx-b metactl local overrides (if adopted later)
+/.metactl/
+metactl.local.yaml
+
+/metactl.local.yaml
+
+# Private overlay / local agent artifacts
+.omc/
+.codex/
+.claude/
+.cursor/
+.gemini/
+.metactl/
+.agents/
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+metactl.yaml
+metactl.lock.json
+Modelfile.*
+opencode.json
+CONSTITUTION.md
+NORTHSTAR.md
+NORTHSTAR_METRICS.md
+PRD.md
+specs/
+openspec/
+skills/
+docs/adr/
+docs/governance/
+docs/status/
+docs/superpowers/
+docs/agents/
+docs/evidence/
+memory/
+scratch/

@@ -1,0 +1,24 @@
+version: "1"
+requirements:
+  - REQ-006-provider-backed-probe-cost-auth-policy-004
+  - REQ-006-provider-backed-probe-cost-auth-policy-006
+  - REQ-006-provider-backed-probe-cost-auth-policy-007
+  - REQ-006-provider-backed-probe-cost-auth-policy-016
+provider:
+  kind: model-preflight
+  model: free_reasoning
+  auth:
+    kind: none
+  candidate_count: 1
+  temperature: 0
+benchmark:
+  kind: textarena
+  env_id: TicTacToe-v0
+  num_players: 2
+  seed: 11
+  strip_available_moves: false
+runtime:
+  retry_limit: 0
+  prompt_prefix: "Return only one legal action from the listed actions."
+artifacts:
+  root: ../tmp/provider-probes/model-preflight-free-tictactoe-seed11

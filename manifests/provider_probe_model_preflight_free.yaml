@@ -1,0 +1,27 @@
+version: "1"
+requirements:
+  - REQ-006-provider-backed-probe-cost-auth-policy-004
+  - REQ-006-provider-backed-probe-cost-auth-policy-006
+  - REQ-006-provider-backed-probe-cost-auth-policy-007
+  - REQ-006-provider-backed-probe-cost-auth-policy-016
+provider:
+  kind: model-preflight
+  model: free_reasoning
+  auth:
+    kind: none
+  candidate_count: 1
+  temperature: 0
+benchmark:
+  kind: textarena
+  env_id: Othello-v0
+  num_players: 2
+  seed: 7
+  strip_available_moves: false
+  options:
+    board_size: 4
+    show_valid: true
+runtime:
+  retry_limit: 0
+  prompt_prefix: "Return only one legal action from the listed actions."
+artifacts:
+  root: ../tmp/provider-probes/model-preflight-free

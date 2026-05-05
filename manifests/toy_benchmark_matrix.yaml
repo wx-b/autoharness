@@ -1,0 +1,30 @@
+version: "1"
+requirements:
+  - REQ-003-toy-benchmarking-001
+  - REQ-003-toy-benchmarking-002
+  - REQ-003-toy-benchmarking-003
+  - REQ-004-expanded-toy-benchmarking-artifact-policy-003
+  - REQ-004-expanded-toy-benchmarking-artifact-policy-004
+suites:
+  - label: dev
+    manifest: toy_benchmark_dev.yaml
+  - label: holdout
+    manifest: toy_benchmark_holdout.yaml
+candidates:
+  - label: robust
+    path: ../tests/fixtures/candidates/ttt_robust_latest_move_parser.py
+  - label: latest
+    path: ../tests/fixtures/candidates/ttt_latest_move_parser.py
+  - label: historical
+    path: ../tests/fixtures/candidates/ttt_bad_historical_parser.py
+  - label: fragile
+    path: ../tests/fixtures/candidates/ttt_retry_fragile_formatter.py
+  - label: negative
+    path: ../tests/fixtures/candidates/ttt_negative_control.py
+ranking:
+  primary_metric: legal_action_rate
+  tie_breakers:
+    - total_reward
+    - retry_count
+artifacts:
+  root: ../artifacts/toy-benchmark-matrix

@@ -1,0 +1,33 @@
+version: "1"
+requirements:
+  - REQ-001-bootstrap-002
+  - REQ-001-bootstrap-003
+  - REQ-001-bootstrap-004
+provider:
+  kind: fixture
+  model: fixture-model
+  sequence:
+    - west
+    - north
+    - east
+    - center
+benchmark:
+  kind: fixture
+  script:
+    - observation: "Legal Actions: 'north'"
+      valid_actions:
+        - north
+    - observation: "Legal Actions: 'east'"
+      valid_actions:
+        - east
+    - observation: "Legal Actions: 'center'"
+      valid_actions:
+        - center
+runtime:
+  retry_limit: 1
+  prompt_prefix: "Return only the action."
+verification:
+  deterministic_runs: 2
+  min_legal_action_rate: 0.75
+artifacts:
+  root: ../artifacts/toy-dev

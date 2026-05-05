@@ -1,0 +1,252 @@
+version: "1"
+requirements:
+  - REQ-003-toy-benchmarking-003
+  - REQ-004-expanded-toy-benchmarking-artifact-policy-002
+  - REQ-004-expanded-toy-benchmarking-artifact-policy-009
+provider:
+  kind: fixture
+benchmark:
+  kind: fixture
+  cases:
+    - case_id: stale-history-dev-a
+      observation: |
+        Available Moves: '[0]', '[1]', '[2]'
+        [Player 0] [0]
+        Available Moves: '[1]', '[2]'
+      valid_actions:
+        - "[1]"
+    - case_id: stale-history-dev-b
+      observation: |
+        Available Moves: '[3]', '[4]'
+        [Player 0] [3]
+        Available Moves: '[4]'
+      valid_actions:
+        - "[4]"
+    - case_id: stale-history-dev-c
+      observation: |
+        Available Moves: '[6]', '[7]', '[8]'
+        [Player 0] [6]
+        Available Moves: '[7]', '[8]'
+      valid_actions:
+        - "[7]"
+    - case_id: stale-history-dev-d
+      observation: |
+        Available Moves: '[12]', '[13]', '[14]'
+        [Player 1] [12]
+        [Player 0] [13]
+        Available Moves: '[14]'
+      valid_actions:
+        - "[14]"
+    - case_id: stale-history-dev-e
+      observation: |
+        Available Moves: '[15]', '[16]', '[17]'
+        [Player 0] [15]
+        Available Moves: '[16]', '[17]'
+        [Player 1] [16]
+        Available Moves: '[17]'
+      valid_actions:
+        - "[17]"
+    - case_id: stale-history-dev-f
+      observation: |
+        Turn log:
+        Available Moves: '[18]', '[19]'
+        [Player 0] [18]
+        Current turn:
+        Available Moves: '[19]'
+      valid_actions:
+        - "[19]"
+    - case_id: exact-format-dev-a
+      observation: "Available Moves: '[5]'"
+      valid_actions:
+        - "[5]"
+    - case_id: exact-format-dev-b
+      observation: "Available Moves: '[7]'"
+      valid_actions:
+        - "[7]"
+    - case_id: exact-format-dev-c
+      observation: "Available Moves: '[2]', '[3]'"
+      valid_actions:
+        - "[2]"
+    - case_id: exact-format-dev-d
+      observation: "Available Moves: '[20]', '[21]'"
+      valid_actions:
+        - "[20]"
+    - case_id: exact-format-dev-e
+      observation: "Available Moves: '[22]'"
+      valid_actions:
+        - "[22]"
+    - case_id: exact-format-dev-f
+      observation: "Available Moves: '[23]', '[24]', '[25]'"
+      valid_actions:
+        - "[23]"
+    - case_id: retry-sensitive-dev-a
+      observation: "Available Moves: '[8]'"
+      valid_actions:
+        - "[8]"
+    - case_id: retry-sensitive-dev-b
+      observation: "Available Moves: '[9]'"
+      valid_actions:
+        - "[9]"
+    - case_id: retry-sensitive-dev-c
+      observation: "Available Moves: '[10]', '[11]'"
+      valid_actions:
+        - "[10]"
+    - case_id: retry-sensitive-dev-d
+      observation: "Available Moves: '[26]', '[27]'"
+      valid_actions:
+        - "[26]"
+    - case_id: retry-sensitive-dev-e
+      observation: "Available Moves: '[28]'"
+      valid_actions:
+        - "[28]"
+    - case_id: retry-sensitive-dev-f
+      observation: "Available Moves: '[29]', '[30]'"
+      valid_actions:
+        - "[29]"
+    - case_id: scripted-dev-a
+      observation: "Available Moves: [1], [2]"
+      valid_actions:
+        - "[1]"
+      max_steps: 2
+      script:
+        - observation: "Available Moves: [1], [2]"
+          valid_actions:
+            - "[1]"
+        - observation: |
+            Available Moves: '[1]', '[4]'
+            [Player 0] [1]
+            Available Moves: '[4]'
+          valid_actions:
+            - "[4]"
+    - case_id: scripted-dev-b
+      observation: "Available Moves: [4], [5]"
+      valid_actions:
+        - "[4]"
+      max_steps: 2
+      script:
+        - observation: "Available Moves: [4], [5]"
+          valid_actions:
+            - "[4]"
+        - observation: "Available Moves: '[5]'"
+          valid_actions:
+            - "[5]"
+    - case_id: scripted-dev-c
+      observation: "Available Moves: [6], [7]"
+      valid_actions:
+        - "[6]"
+      max_steps: 2
+      script:
+        - observation: "Available Moves: [6], [7]"
+          valid_actions:
+            - "[6]"
+        - observation: |
+            Available Moves: '[6]', '[9]'
+            [Player 0] [6]
+            Available Moves: '[9]'
+          valid_actions:
+            - "[9]"
+    - case_id: scripted-dev-d
+      observation: "Available Moves: [31], [32]"
+      valid_actions:
+        - "[31]"
+      max_steps: 2
+      script:
+        - observation: "Available Moves: [31], [32]"
+          valid_actions:
+            - "[31]"
+        - observation: |
+            Available Moves: '[31]', '[33]'
+            [Player 0] [31]
+            Available Moves: '[33]'
+          valid_actions:
+            - "[33]"
+    - case_id: scripted-dev-e
+      observation: "Available Moves: [34], [35]"
+      valid_actions:
+        - "[34]"
+      max_steps: 3
+      script:
+        - observation: "Available Moves: [34], [35]"
+          valid_actions:
+            - "[34]"
+        - observation: "Available Moves: '[35]', '[36]'"
+          valid_actions:
+            - "[35]"
+        - observation: "Available Moves: '[36]'"
+          valid_actions:
+            - "[36]"
+    - case_id: scripted-dev-f
+      observation: "Available Moves: [37], [38]"
+      valid_actions:
+        - "[37]"
+      max_steps: 2
+      script:
+        - observation: "Available Moves: [37], [38]"
+          valid_actions:
+            - "[37]"
+        - observation: |
+            Available Moves: '[37]', '[39]'
+            [Player 0] [37]
+            Available Moves: '[39]'
+          valid_actions:
+            - "[39]"
+    - case_id: whitespace-format-dev-a
+      observation: "Available Moves:   '[40]'"
+      valid_actions:
+        - "[40]"
+    - case_id: whitespace-format-dev-b
+      observation: "Available Moves:\t'[41]',   '[42]'"
+      valid_actions:
+        - "[41]"
+    - case_id: whitespace-format-dev-c
+      observation: |
+        Available Moves:
+          '[43]', '[44]'
+      valid_actions:
+        - "[43]"
+    - case_id: whitespace-format-dev-d
+      observation: "Available Moves: '[45]' , '[46]'"
+      valid_actions:
+        - "[45]"
+    - case_id: whitespace-format-dev-e
+      observation: |
+        Status: thinking
+        Available Moves:    '[47]', '[48]'
+      valid_actions:
+        - "[47]"
+    - case_id: whitespace-format-dev-f
+      observation: "Available Moves: '[49]'"
+      valid_actions:
+        - "[49]"
+    - case_id: alias-family-dev-a
+      observation: "Legal Actions: '[50]', '[51]'"
+      valid_actions:
+        - "[50]"
+    - case_id: alias-family-dev-b
+      observation: "Available Actions: '[52]'"
+      valid_actions:
+        - "[52]"
+    - case_id: alias-family-dev-c
+      observation: "Legal Moves: '[53]', '[54]'"
+      valid_actions:
+        - "[53]"
+    - case_id: alias-family-dev-d
+      observation: |
+        Prior state:
+        Available Moves: '[55]', '[56]'
+        Current legal actions: '[56]'
+      valid_actions:
+        - "[56]"
+    - case_id: alias-family-dev-e
+      observation: "Valid Actions: '[57]', '[58]'"
+      valid_actions:
+        - "[57]"
+    - case_id: alias-family-dev-f
+      observation: "Action aliases: '[59]', '[60]'"
+      valid_actions:
+        - "[59]"
+runtime:
+  retry_limit: 1
+  prompt_prefix: "Return only the action."
+artifacts:
+  root: ../artifacts/toy-benchmark-dev

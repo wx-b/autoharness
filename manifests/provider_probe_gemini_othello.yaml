@@ -1,0 +1,32 @@
+version: "1"
+requirements:
+  - REQ-006-provider-backed-probe-cost-auth-policy-004
+  - REQ-006-provider-backed-probe-cost-auth-policy-006
+  - REQ-006-provider-backed-probe-cost-auth-policy-007
+  - REQ-006-provider-backed-probe-cost-auth-policy-008
+  - REQ-006-provider-backed-probe-cost-auth-policy-009
+  - REQ-006-provider-backed-probe-cost-auth-policy-011
+provider:
+  kind: gemini-cli
+  model: gemini-2.5-flash
+  auth:
+    kind: oauth-cli
+  candidate_count: 1
+  temperature: 0
+  options:
+    command: gemini
+    timeout_seconds: 120
+benchmark:
+  kind: textarena
+  env_id: Othello-v0
+  num_players: 2
+  seed: 7
+  strip_available_moves: false
+  options:
+    board_size: 4
+    show_valid: true
+runtime:
+  retry_limit: 0
+  prompt_prefix: "Return only one legal action from the listed actions."
+artifacts:
+  root: ../tmp/provider-probes/gemini-othello
