@@ -19,7 +19,7 @@ uv sync --extra dev --extra textarena --extra providers --extra preflight
 Run these before opening a change:
 
 ```bash
-scripts/check_public_boundary.sh
+bash scripts/check_release_tree.sh
 uv run ruff check .
 uv run mypy src
 uv run pytest -q
@@ -28,6 +28,4 @@ uv build
 
 ## Artifact Rules
 
-Write fresh verifier output under ignored paths such as `tmp/verify-artifacts/`. Do not commit runtime artifacts unless a spec explicitly promotes them to curated evidence.
-
-Private/local agent artifacts must stay out of the public repository.
+Write fresh verifier output under ignored paths such as `tmp/verify-artifacts/`. Do not commit runtime artifacts unless a documented change explicitly promotes them to curated evidence.

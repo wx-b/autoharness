@@ -21,7 +21,7 @@ jobs:
           printf '#!/usr/bin/env sh\nexit 0\n' > .ci-bin/gemini
           chmod +x .ci-bin/gemini
           echo "$PWD/.ci-bin" >> "$GITHUB_PATH"
-      - run: scripts/check_public_boundary.sh
+      - run: bash scripts/check_release_tree.sh
       - run: uv run ruff check .
       - run: uv run mypy src
       - run: uv run pytest -q

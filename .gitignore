@@ -15,9 +15,6 @@ Desktop.ini
 *.swo
 *~
 
-# Local scratch (notes, PDFs, downloads - not canonical repo content)
-/notepads/
-
 # Secrets and local env (keep examples committed explicitly if needed)
 .env
 .env.local
@@ -72,46 +69,8 @@ target/
 *.log
 /tmp/
 /artifacts/
-/generated/
 /temp/
 .cache/
 
 # Merge / patch leftovers
 *.orig
-
-# wx-b metactl local overrides (if adopted later)
-/.metactl/
-metactl.local.yaml
-
-/metactl.local.yaml
-
-# Private overlay / local agent artifacts
-.omc/
-.codex/
-.claude/
-.cursor/
-.gemini/
-.metactl/
-.agents/
-AGENTS.md
-CLAUDE.md
-GEMINI.md
-metactl.yaml
-metactl.lock.json
-Modelfile.*
-opencode.json
-CONSTITUTION.md
-NORTHSTAR.md
-NORTHSTAR_METRICS.md
-PRD.md
-specs/
-openspec/
-skills/
-docs/adr/
-docs/governance/
-docs/status/
-docs/superpowers/
-docs/agents/
-docs/evidence/
-memory/
-scratch/

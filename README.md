@@ -21,7 +21,7 @@ It is inspired by the AutoHarness paper: [Lou et al., "AutoHarness: improving LL
 </p>
 
 <p>
-  <sub>Hero demo source: <a href="demos/tapes/quickstart.tape">demos/tapes/quickstart.tape</a>. Video formats: <a href="https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/quickstart.mp4">MP4</a> | <a href="https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/quickstart.webm">WebM</a>. More demos: <a href="docs/demos.md">docs/demos.md</a>.</sub>
+  <sub>Video formats: <a href="https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/quickstart.mp4">MP4</a> | <a href="https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/quickstart.webm">WebM</a>. More demos: <a href="docs/demos.md">docs/demos.md</a>.</sub>
 </p>
 
 ## Quickstart
@@ -105,19 +105,19 @@ uv run autoharness provider-report \
 <details>
 <summary><strong>More Demos</strong></summary>
 
-The README keeps the first-success demo above the fold. Deeper walkthroughs live in [docs/demos.md](docs/demos.md), with committed VHS sources and MP4/WebM outputs.
+The README keeps the first-success demo above the fold. Deeper walkthroughs live in [docs/demos.md](docs/demos.md).
 
 ### Benchmark Matrix
 
 ![AutoHarness benchmark matrix](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/benchmark-matrix.gif)
 
-Source: [`demos/tapes/benchmark-matrix.tape`](demos/tapes/benchmark-matrix.tape). Video: [MP4](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/benchmark-matrix.mp4) | [WebM](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/benchmark-matrix.webm).
+Video: [MP4](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/benchmark-matrix.mp4) | [WebM](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/benchmark-matrix.webm).
 
 ### Provider Probe Dry Run
 
 ![AutoHarness provider probe dry run](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/provider-probe.gif)
 
-Source: [`demos/tapes/provider-probe.tape`](demos/tapes/provider-probe.tape). Video: [MP4](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/provider-probe.mp4) | [WebM](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/provider-probe.webm).
+Video: [MP4](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/provider-probe.mp4) | [WebM](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/provider-probe.webm).
 
 </details>
 
@@ -174,41 +174,16 @@ uv sync --extra dev --extra textarena --extra providers --extra preflight
 <details>
 <summary><strong>Development Checks</strong></summary>
 
-Run the public boundary check and package checks before opening a change:
+Run package checks before opening a change:
 
 ```bash
-scripts/check_public_boundary.sh
+bash scripts/check_release_tree.sh
 uv run ruff check .
 uv run mypy src
 uv run pytest -q
 uv build
 # dist/ contains the source distribution and wheel
 ```
-
-The first command is a source-distribution guard. It keeps private/local agent artifacts, scratch docs, and provider-specific notes out of the public package tree.
-
-Regenerate demo media when CLI output changes:
-
-```bash
-vhs validate "demos/tapes/*.tape"
-vhs demos/tapes/quickstart.tape
-vhs demos/tapes/benchmark-matrix.tape
-vhs demos/tapes/provider-probe.tape
-```
-
-The `Render CLI demos` workflow rerenders tapes on pull requests that touch demo sources, manifests, fixtures, or CLI code.
-
-</details>
-
-<details>
-<summary><strong>Agent and Contributor Notes</strong></summary>
-
-- Public product code lives under `src/autoharness/`.
-- Public manifests live under `manifests/`.
-- Public docs live under `docs/`.
-- Runtime artifacts should stay under ignored paths such as `tmp/` or `artifacts/`.
-- Private/local agent files such as `AGENTS.md`, `.codex/`, `.claude/`, `.cursor/`, `.gemini/`, `.metactl/`, `specs/`, `NORTHSTAR.md`, and provider-specific notes must not be added to this public repo.
-- Safe verification commands: `scripts/check_public_boundary.sh`, `uv run ruff check .`, `uv run mypy src`, `uv run pytest -q`, and `uv build`.
 
 </details>
 
@@ -218,9 +193,8 @@ The `Render CLI demos` workflow rerenders tapes on pull requests that touch demo
 - `src/autoharness/` - package code and CLI implementation.
 - `manifests/` - committed fixture, TextArena, benchmark, and provider-probe manifests.
 - `tests/` - public package test suite.
-- `demos/tapes/` - reproducible VHS demo sources.
 - `demos/output/` - rendered public demo assets.
-- `docs/demos.md` - demo gallery and regeneration commands.
+- `docs/demos.md` - demo gallery.
 - `docs/architecture/overview.md` - component and data-flow overview.
 - `docs/artifact_policy.md` - tracked source versus generated output policy.
 - `docs/mcp/servers.md` - public MCP server notes.

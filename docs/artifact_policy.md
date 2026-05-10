@@ -15,4 +15,4 @@ A release candidate should pass checks from a clean tree without rewriting track
 
 ## Curated Demo Media
 
-Generated demo media under `demos/output/` is committed because it is public documentation, not runtime evidence. Keep the matching reproducible source tapes under `demos/tapes/`, and rerender both together when CLI output changes.
+Demo assets under `demos/output/` are committed because they are public documentation, not runtime evidence. Runtime evidence and verifier output should stay under ignored artifact directories unless explicitly promoted.
