@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: uv sync --extra dev
+      - run: uv sync --extra dev --extra textarena --extra providers --extra preflight
       - run: scripts/check_public_boundary.sh
       - run: uv run ruff check .
       - run: uv run mypy src
