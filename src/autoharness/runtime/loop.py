@@ -1,6 +1,7 @@
 # Requirement coverage: REQ-001-bootstrap-002, REQ-001-bootstrap-004
 from __future__ import annotations
 
+import os
 from pathlib import Path
 from uuid import uuid4
 
@@ -27,7 +28,7 @@ def run_episode(
     benchmark.reset()
     store = ArtifactStore(artifact_root)
     critic = DeterministicCritic()
-    run_id = uuid4().hex
+    run_id = os.getenv("AUTOHARNESS_RUN_ID") or uuid4().hex
     trace: list[StepRecord] = []
     retry_count = 0
     steps = 0

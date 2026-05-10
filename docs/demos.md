@@ -2,7 +2,7 @@
 
 These demos are generated from committed VHS tapes so the README media stays reproducible. The tapes use local fixture manifests only, isolate artifacts under `/tmp`, and avoid provider calls unless a command explicitly opts in.
 
-The tapes favor simple commands and visible CLI output. Typing is deterministic but human-paced: commands are split into semantic chunks with varied speeds and short pauses instead of a single metronomic line.
+The tapes favor simple commands and visible CLI output. Typing is deterministic but human-paced: commands are split into semantic chunks with varied speeds and short pauses instead of a single metronomic line. Hidden setup pins `AUTOHARNESS_RUN_ID=demo-run` so the visible transcript does not drift on every render.
 
 ## First Successful Verification
 

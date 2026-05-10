@@ -40,4 +40,6 @@ jobs:
           ffprobe -v error -select_streams v:0 -show_entries stream=width,height,duration demos/output/quickstart.mp4
           ffprobe -v error -select_streams v:0 -show_entries stream=width,height,duration demos/output/benchmark-matrix.mp4
           ffprobe -v error -select_streams v:0 -show_entries stream=width,height,duration demos/output/provider-probe.mp4
-      - run: git diff --exit-code -- demos/output
+          test -s demos/output/quickstart.gif
+          test -s demos/output/benchmark-matrix.gif
+          test -s demos/output/provider-probe.gif

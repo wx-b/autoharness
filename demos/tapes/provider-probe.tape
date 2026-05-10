@@ -30,6 +30,8 @@ Type "cd $AUTOHARNESS_DEMO_SOURCE"
 Enter
 Type "uv sync --extra dev --extra preflight >/dev/null 2>&1"
 Enter
+Type "export AUTOHARNESS_RUN_ID=demo-run"
+Enter
 Type "rm -rf /tmp/autoharness-demo"
 Enter
 Type "clear"
