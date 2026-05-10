@@ -36,23 +36,12 @@ uv run autoharness verify --manifest manifests/offline_smoke.yaml --artifact-roo
 
 That first run needs no provider credentials. It writes ignored local artifacts under `tmp/verify-artifacts/offline-smoke/`.
 
-Inspect the machine-readable result:
+Check the artifacts:
 
 ```bash
-jq '{benchmark, status, total_reward, legal_action_rate, steps}' tmp/verify-artifacts/offline-smoke/run-summary.json
+ls tmp/verify-artifacts/offline-smoke
+# resolved-manifest.json  run-summary.json  trace.json
 ```
-
-> **Expected output**
->
-> ```json
-> {
->   "benchmark": "fixture",
->   "status": "passed",
->   "total_reward": 1.0,
->   "legal_action_rate": 0.5,
->   "steps": 1
-> }
-> ```
 
 ## What You Get
 

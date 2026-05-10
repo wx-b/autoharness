@@ -2,6 +2,8 @@
 
 These demos are generated from committed VHS tapes so the README media stays reproducible. The tapes use local fixture manifests only, isolate artifacts under `/tmp`, and avoid provider calls unless a command explicitly opts in.
 
+The tapes favor simple commands and visible CLI output. Typing is deterministic but human-paced: commands are split into semantic chunks with varied speeds and short pauses instead of a single metronomic line.
+
 ## First Successful Verification
 
 ![AutoHarness quickstart verification](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/quickstart.gif)
@@ -9,7 +11,7 @@ These demos are generated from committed VHS tapes so the README media stays rep
 - Source: [`demos/tapes/quickstart.tape`](../demos/tapes/quickstart.tape)
 - Video: [MP4](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/quickstart.mp4) | [WebM](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/quickstart.webm)
 
-The hero demo shows the no-credential path: run `verify` against `manifests/offline_smoke.yaml`, then inspect the structured run summary.
+The hero demo shows the no-credential path: run `verify` against `manifests/offline_smoke.yaml`, then list the generated artifacts.
 
 ## Benchmark Matrix
 
@@ -18,7 +20,7 @@ The hero demo shows the no-credential path: run `verify` against `manifests/offl
 - Source: [`demos/tapes/benchmark-matrix.tape`](../demos/tapes/benchmark-matrix.tape)
 - Video: [MP4](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/benchmark-matrix.mp4) | [WebM](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/benchmark-matrix.webm)
 
-This demo is for evaluators comparing candidates. It runs the toy benchmark matrix, writes a leaderboard and summary, then shows the top candidates without exposing local paths.
+This demo is for evaluators comparing candidates. It runs the toy benchmark matrix, writes a leaderboard and summary, then lists the generated candidate artifacts without exposing local paths.
 
 ## Provider Probe Dry Run
 
@@ -27,7 +29,7 @@ This demo is for evaluators comparing candidates. It runs the toy benchmark matr
 - Source: [`demos/tapes/provider-probe.tape`](../demos/tapes/provider-probe.tape)
 - Video: [MP4](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/provider-probe.mp4) | [WebM](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/provider-probe.webm)
 
-This demo is for advanced setup. It exercises the guarded provider-probe path in dry-run mode, writes preflight and budget evidence, then summarizes the probe output.
+This demo is for advanced setup. It exercises the guarded provider-probe path in dry-run mode, writes preflight and budget evidence, then generates the provider evidence report.
 
 ## Regenerate
 

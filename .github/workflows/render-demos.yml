@@ -24,24 +24,18 @@ on:
 
 jobs:
   render:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: sudo apt-get update && sudo apt-get install -y ffmpeg jq
+      - run: brew install vhs
       - run: uv sync --extra dev --extra preflight
-      - uses: charmbracelet/vhs-action@v2
-        with:
-          path: demos/tapes/quickstart.tape
-      - uses: charmbracelet/vhs-action@v2
-        with:
-          path: demos/tapes/benchmark-matrix.tape
-      - uses: charmbracelet/vhs-action@v2
-        with:
-          path: demos/tapes/provider-probe.tape
+      - run: vhs demos/tapes/quickstart.tape
+      - run: vhs demos/tapes/benchmark-matrix.tape
+      - run: vhs demos/tapes/provider-probe.tape
       - run: |
           ffprobe -v error -select_streams v:0 -show_entries stream=width,height,duration demos/output/quickstart.mp4
           ffprobe -v error -select_streams v:0 -show_entries stream=width,height,duration demos/output/benchmark-matrix.mp4

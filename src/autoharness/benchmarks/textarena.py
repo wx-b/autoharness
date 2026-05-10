@@ -78,7 +78,7 @@ class TextArenaBenchmark(Benchmark):
 
     def _make_env(self, env_id: str, options: dict[str, Any]) -> Any:
         try:
-            import textarena as ta  # type: ignore[import-untyped]
+            import textarena as ta  # type: ignore[import-not-found]
         except ImportError as exc:  # pragma: no cover - optional dependency
             raise RuntimeError(
                 "textarena is not installed; add the textarena extra to use TextArenaBenchmark"
