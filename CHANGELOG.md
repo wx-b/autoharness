@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2
+
+- Updates the README hero to use the Othello gameplay proof recording.
+- Adds collapsed PigDice and TicTacToe game-trace recordings to the README.
+- Adds campaign, benchmark, and progress timeline proof recordings to the demo gallery.
+- Aligns the package runtime version with the public release version.
+
 ## 0.1.1
 
 - Removes demo-generation sources and render workflow from the public repository.

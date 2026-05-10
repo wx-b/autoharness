@@ -17,11 +17,7 @@ Use it when you need a small harness that can answer:
 It is inspired by the AutoHarness paper: [Lou et al., "AutoHarness: improving LLM agents by automatically synthesizing a code harness"](https://arxiv.org/abs/2603.03329). This repository is a clean-room scaffold for verifier-first experimentation; it does not claim paper-scale parity.
 
 <p>
-  <img src="https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/quickstart.gif" alt="Terminal demo showing AutoHarness verifying the offline smoke manifest and printing the structured run summary." width="100%">
-</p>
-
-<p>
-  <sub>Video formats: <a href="https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/quickstart.mp4">MP4</a> | <a href="https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/quickstart.webm">WebM</a>. More demos: <a href="docs/demos.md">docs/demos.md</a>.</sub>
+  <img src="https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/othello-gameplay-review.gif" alt="Terminal demo showing AutoHarness replaying an Othello trace with legal moves, board flips, score changes, and a final run summary." width="100%">
 </p>
 
 ## Quickstart
@@ -103,21 +99,21 @@ uv run autoharness provider-report \
 ```
 
 <details>
-<summary><strong>More Demos</strong></summary>
+<summary><strong>More Game Traces</strong></summary>
 
-The README keeps the first-success demo above the fold. Deeper walkthroughs live in [docs/demos.md](docs/demos.md).
+These traces show why AutoHarness records actions, legality, rewards, and summaries instead of only command success.
 
-### Benchmark Matrix
+### PigDice Risk Trace
 
-![AutoHarness benchmark matrix](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/benchmark-matrix.gif)
+![AutoHarness PigDice risk trace](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/pigdice-risk-review.gif)
 
-Video: [MP4](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/benchmark-matrix.mp4) | [WebM](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/benchmark-matrix.webm).
+The policy only chooses legal actions, but it keeps rolling, repeatedly busts, and finishes with `total_reward=0.0`.
 
-### Provider Probe Dry Run
+### TicTacToe Movement Trace
 
-![AutoHarness provider probe dry run](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/provider-probe.gif)
+![AutoHarness TicTacToe movement trace](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/tictactoe-gameplay-review.gif)
 
-Video: [MP4](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/provider-probe.mp4) | [WebM](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/provider-probe.webm).
+The trace replays a real TextArena TicTacToe run and leaves the machine-checkable summary on screen.
 
 </details>
 
