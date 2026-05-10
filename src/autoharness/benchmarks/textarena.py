@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import re
+from importlib import import_module
 from typing import Any, cast
 
 from .base import Benchmark, StepOutcome
@@ -78,7 +79,7 @@ class TextArenaBenchmark(Benchmark):
 
     def _make_env(self, env_id: str, options: dict[str, Any]) -> Any:
         try:
-            import textarena as ta  # type: ignore[import-not-found]
+            ta = import_module("textarena")
         except ImportError as exc:  # pragma: no cover - optional dependency
             raise RuntimeError(
                 "textarena is not installed; add the textarena extra to use TextArenaBenchmark"

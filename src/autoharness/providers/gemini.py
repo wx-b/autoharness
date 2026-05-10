@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import time
 from collections.abc import Callable, Mapping
+from importlib import import_module
 from typing import Any
 
 from .auth import read_api_key, read_google_project
@@ -31,7 +32,7 @@ class GeminiProvider(Provider):
         if self._client_factory is not None:
             return self._client_factory()
         try:
-            from google import genai  # type: ignore[import-not-found]
+            genai = import_module("google.genai")
         except ImportError as exc:  # pragma: no cover - optional dependency
             raise RuntimeError(
                 "google-genai is not installed; add the providers extra to use GeminiProvider"
