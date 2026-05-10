@@ -5,9 +5,24 @@
 [![Package status: alpha](https://img.shields.io/badge/status-alpha-f59e0b)](CHANGELOG.md)
 [![CLI: Typer](https://img.shields.io/badge/cli-Typer-111827)](https://typer.tiangolo.com/)
 
-AutoHarness is a package-first CLI for reproducible action-verifier experiments. It gives researchers and eval engineers a small, inspectable loop for running candidates against deterministic toy environments, TextArena smoke tasks, and guarded provider probes.
+AutoHarness is a package-first CLI for reproducible action-verifier experiments. It helps researchers and eval engineers turn candidate agent code into auditable evidence: deterministic local runs, benchmark leaderboards, TextArena smoke checks, and guarded provider probes.
+
+Use it when you need a small harness that can answer:
+
+- Did this candidate choose legal actions?
+- Did it improve on dev and holdout fixtures?
+- Which candidate wins under the same benchmark matrix?
+- Can a provider-backed run pass preflight and budget gates before any live call?
 
 It is inspired by the AutoHarness paper: [Lou et al., "AutoHarness: improving LLM agents by automatically synthesizing a code harness"](https://arxiv.org/abs/2603.03329). This repository is a clean-room scaffold for verifier-first experimentation; it does not claim paper-scale parity.
+
+<p>
+  <img src="https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/quickstart.gif" alt="Terminal demo showing AutoHarness verifying the offline smoke manifest and printing the structured run summary." width="100%">
+</p>
+
+<p>
+  <sub>Hero demo source: <a href="demos/tapes/quickstart.tape">demos/tapes/quickstart.tape</a>. Video formats: <a href="https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/quickstart.mp4">MP4</a> | <a href="https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/quickstart.webm">WebM</a>. More demos: <a href="docs/demos.md">docs/demos.md</a>.</sub>
+</p>
 
 ## Quickstart
 
@@ -15,99 +30,127 @@ It is inspired by the AutoHarness paper: [Lou et al., "AutoHarness: improving LL
 git clone https://github.com/wx-b/autoharness.git
 cd autoharness
 uv sync --extra dev
-uv run autoharness verify \
-  --manifest manifests/offline_smoke.yaml \
-  --artifact-root tmp/verify-artifacts/offline-smoke
+uv run autoharness verify --manifest manifests/offline_smoke.yaml --artifact-root tmp/verify-artifacts/offline-smoke
+# Verification passed for run <run-id>
 ```
 
-Expected result:
+That first run needs no provider credentials. It writes ignored local artifacts under `tmp/verify-artifacts/offline-smoke/`.
 
-```text
-Verification passed for run <run-id>
+Inspect the machine-readable result:
+
+```bash
+jq '{benchmark, status, total_reward, legal_action_rate, steps}' tmp/verify-artifacts/offline-smoke/run-summary.json
 ```
 
-That command runs without provider credentials and writes fresh output under `tmp/`, which is ignored by default.
+> **Expected output**
+>
+> ```json
+> {
+>   "benchmark": "fixture",
+>   "status": "passed",
+>   "total_reward": 1.0,
+>   "legal_action_rate": 0.5,
+>   "steps": 1
+> }
+> ```
 
 ## What You Get
 
 - Manifest-driven verifier runs with deterministic local fixtures.
 - Benchmark matrices that compare candidate modules and write leaderboards.
 - TextArena smoke manifests for checking real environment integration.
-- Provider probe commands with dry-run and budget gates before live calls.
-- Structured artifacts for legality, reward, failure bundles, and summaries.
+- Provider probe commands with dry-run, preflight, and budget evidence before live calls.
+- Structured JSON artifacts for legality, reward, retries, failure bundles, and summaries.
 - A small Python package surface that is easy to test, inspect, and extend.
 
-## Common Commands
+## Common Workflows
 
 Run the CLI:
 
 ```bash
 uv run autoharness --help
+# Commands: verify, campaign, benchmark, provider-probe, provider-report
 ```
 
-Expected command set:
-
-```text
-verify
-campaign
-benchmark
-provider-probe
-provider-report
-```
-
-Compare deterministic candidate baselines:
+Compare candidate modules with the toy benchmark matrix:
 
 ```bash
-uv run autoharness benchmark \
-  --matrix manifests/toy_benchmark_matrix.yaml \
-  --artifact-root tmp/verify-artifacts/toy-benchmark-matrix
+uv run autoharness benchmark --matrix manifests/toy_benchmark_matrix.yaml --artifact-root tmp/verify-artifacts/toy-benchmark-matrix
+# Top candidate: robust (.../benchmark-summary.json, .../leaderboard.md)
 ```
 
-Expected result:
+Run a deterministic refinement campaign:
 
-```text
-Top candidate: robust (.../benchmark-summary.json, .../leaderboard.md)
+```bash
+uv run autoharness campaign \
+  --candidate tests/fixtures/candidates/ttt_latest_move_parser.py \
+  --dev-manifest manifests/toy_refinement_dev.yaml \
+  --holdout-manifest manifests/toy_refinement_holdout.yaml \
+  --artifact-root tmp/verify-artifacts/refinement \
+  --patch-text "prefer exact legal actions" \
+  --max-iterations 1
+# Campaign converged: .../tests/fixtures/candidates/ttt_latest_move_parser.py (.../campaign-summary.json)
 ```
 
-Dry-run a provider-backed probe:
+Dry-run a provider probe before any live call:
 
 ```bash
 uv sync --extra dev --extra preflight
 uv run autoharness provider-probe \
   --manifest manifests/provider_probe_model_preflight_free.yaml \
-  --artifact-root tmp/verify-artifacts/provider-probe-free \
+  --artifact-root tmp/provider-probes/model-preflight-free \
+  --max-spend-usd 1.00 \
   --dry-run
+# Provider probe dry-run passed (.../provider-probe-preflight.json, .../provider-probe-budget.json)
 ```
 
-Expected result:
+Summarize provider evidence:
 
-```text
-Provider probe dry-run passed (.../provider-probe-preflight.json, .../provider-probe-budget.json)
+```bash
+uv run autoharness provider-report \
+  --probe-root tmp/provider-probes/model-preflight-free \
+  --output-root tmp/provider-probes/report
+# Provider evidence report written to .../provider-evidence-report.json and .../provider-evidence-report.md
 ```
+
+<details>
+<summary><strong>More Demos</strong></summary>
+
+The README keeps the first-success demo above the fold. Deeper walkthroughs live in [docs/demos.md](docs/demos.md), with committed VHS sources and MP4/WebM outputs.
+
+### Benchmark Matrix
+
+![AutoHarness benchmark matrix](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/benchmark-matrix.gif)
+
+Source: [`demos/tapes/benchmark-matrix.tape`](demos/tapes/benchmark-matrix.tape). Video: [MP4](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/benchmark-matrix.mp4) | [WebM](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/benchmark-matrix.webm).
+
+### Provider Probe Dry Run
+
+![AutoHarness provider probe dry run](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/provider-probe.gif)
+
+Source: [`demos/tapes/provider-probe.tape`](demos/tapes/provider-probe.tape). Video: [MP4](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/provider-probe.mp4) | [WebM](https://raw.githubusercontent.com/wx-b/autoharness/main/demos/output/provider-probe.webm).
+
+</details>
 
 ## How It Works
 
 ```text
-manifest -> provider/candidate -> environment loop -> verifier -> artifact store
-                                            |
-                                            v
-                                 summaries, failures, leaderboards
+manifest.yaml
+  -> candidate provider
+  -> benchmark suite
+  -> action verifier
+  -> artifact store
+  -> JSON summaries, traces, leaderboards, provider evidence
 ```
 
-The package keeps the experiment loop explicit:
+The package keeps experiment control in manifests and writes artifacts outside source by default. Verifier logic is deterministic for local fixtures; provider-backed paths require explicit preflight and budget evidence.
 
-- Manifests describe candidates, environments, seeds, and artifact roots.
-- Providers adapt candidate modules, model-preflight, Gemini, or Gemini CLI surfaces.
-- Runtime loops execute episodes and collect action legality and reward signals.
-- Critics and benchmarks turn run traces into inspectable summaries.
-- Artifact stores persist evidence without requiring source-control churn.
-
-See [docs/architecture/overview.md](docs/architecture/overview.md) for the fuller component map.
+See [docs/architecture/overview.md](docs/architecture/overview.md) for the component map and [docs/artifact_policy.md](docs/artifact_policy.md) for tracked source versus generated output rules.
 
 <details>
 <summary><strong>Install Options</strong></summary>
 
-Base development environment:
+Core development install:
 
 ```bash
 uv sync --extra dev
@@ -140,46 +183,9 @@ uv sync --extra dev --extra textarena --extra providers --extra preflight
 </details>
 
 <details>
-<summary><strong>Workflow Examples</strong></summary>
-
-Run a deterministic refinement campaign:
-
-```bash
-uv run autoharness campaign \
-  --candidate tests/fixtures/candidates/ttt_latest_move_parser.py \
-  --dev-manifest manifests/toy_refinement_dev.yaml \
-  --holdout-manifest manifests/toy_refinement_holdout.yaml \
-  --artifact-root tmp/verify-artifacts/refinement \
-  --patch-text "prefer exact legal actions" \
-  --max-iterations 1
-```
-
-Expected result:
-
-```text
-Campaign converged: .../tests/fixtures/candidates/ttt_latest_move_parser.py (.../campaign-summary.json)
-```
-
-Run TextArena smoke manifests after installing the `textarena` extra:
-
-```bash
-uv run autoharness verify \
-  --manifest manifests/textarena_tictactoe_smoke.yaml \
-  --artifact-root tmp/verify-artifacts/textarena-tictactoe
-```
-
-Expected result:
-
-```text
-Verification passed for run <run-id>
-```
-
-</details>
-
-<details>
 <summary><strong>Development Checks</strong></summary>
 
-Run the standard gate before proposing changes:
+Run the public boundary check and package checks before opening a change:
 
 ```bash
 scripts/check_public_boundary.sh
@@ -187,36 +193,33 @@ uv run ruff check .
 uv run mypy src
 uv run pytest -q
 uv build
+# dist/ contains the source distribution and wheel
 ```
 
-Expected result:
+The first command is a source-distribution guard. It keeps private/local agent artifacts, scratch docs, and provider-specific notes out of the public package tree.
 
-```text
-all commands exit 0
-ruff reports: All checks passed!
-mypy reports: Success: no issues found in 45 source files
-pytest reports: 104 passed
-uv build writes an sdist and wheel under dist/
+Regenerate demo media when CLI output changes:
+
+```bash
+vhs validate "demos/tapes/*.tape"
+vhs demos/tapes/quickstart.tape
+vhs demos/tapes/benchmark-matrix.tape
+vhs demos/tapes/provider-probe.tape
 ```
 
-The first command is a source-distribution guard. It keeps the package tree focused on releaseable source and docs.
+The `Render CLI demos` workflow rerenders tapes on pull requests that touch demo sources, manifests, fixtures, or CLI code.
 
 </details>
 
 <details>
-<summary><strong>Artifacts and Outputs</strong></summary>
+<summary><strong>Agent and Contributor Notes</strong></summary>
 
-Write fresh verifier output under `tmp/verify-artifacts/` or another ignored local path:
-
-```bash
-uv run autoharness verify \
-  --manifest manifests/offline_smoke.yaml \
-  --artifact-root tmp/verify-artifacts/offline-smoke
-```
-
-Runtime artifacts and generated evidence are reproducible outputs. Durable evidence should be promoted into docs deliberately rather than committed as raw run output.
-
-See [docs/artifact_policy.md](docs/artifact_policy.md).
+- Public product code lives under `src/autoharness/`.
+- Public manifests live under `manifests/`.
+- Public docs live under `docs/`.
+- Runtime artifacts should stay under ignored paths such as `tmp/` or `artifacts/`.
+- Private/local agent files such as `AGENTS.md`, `.codex/`, `.claude/`, `.cursor/`, `.gemini/`, `.metactl/`, `specs/`, `NORTHSTAR.md`, and provider-specific notes must not be added to this public repo.
+- Safe verification commands: `scripts/check_public_boundary.sh`, `uv run ruff check .`, `uv run mypy src`, `uv run pytest -q`, and `uv build`.
 
 </details>
 
@@ -224,8 +227,11 @@ See [docs/artifact_policy.md](docs/artifact_policy.md).
 <summary><strong>Repository Map</strong></summary>
 
 - `src/autoharness/` - package code and CLI implementation.
-- `manifests/` - smoke, benchmark, TextArena, and provider-probe manifests.
+- `manifests/` - committed fixture, TextArena, benchmark, and provider-probe manifests.
 - `tests/` - public package test suite.
+- `demos/tapes/` - reproducible VHS demo sources.
+- `demos/output/` - rendered public demo assets.
+- `docs/demos.md` - demo gallery and regeneration commands.
 - `docs/architecture/overview.md` - component and data-flow overview.
 - `docs/artifact_policy.md` - tracked source versus generated output policy.
 - `docs/mcp/servers.md` - public MCP server notes.
