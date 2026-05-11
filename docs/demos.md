@@ -1,6 +1,6 @@
 # CLI Demos
 
-This gallery keeps the README focused while preserving deeper proof recordings for evaluators.
+This gallery keeps the README focused while preserving deeper workflow examples for evaluators.
 
 ## First Successful Verification
 

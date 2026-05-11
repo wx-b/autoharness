@@ -84,8 +84,7 @@ uv sync --extra dev --extra preflight
 uv run autoharness provider-probe \
   --manifest manifests/provider_probe_model_preflight_free.yaml \
   --artifact-root tmp/provider-probes/model-preflight-free \
-  --max-spend-usd 1.00 \
-  --dry-run
+  --max-spend-usd 1.00
 # Provider probe dry-run passed (.../provider-probe-preflight.json, .../provider-probe-budget.json)
 ```
 
@@ -136,13 +135,15 @@ See [docs/architecture/overview.md](docs/architecture/overview.md) for the compo
 
 The paper uses Gemini-2.5-Flash to synthesize harness code and compares resulting agents against larger models such as Gemini-2.5-Pro and GPT-5.2-High. AutoHarness does not bundle those paper experiments or require a specific hosted model for local verification.
 
-For day-to-day testing, start with the deterministic fixture manifests and TextArena smoke checks. When a provider-backed path is useful, AutoHarness uses [ModelPreflight](https://github.com/pylit-ai/model-preflight) through the optional `preflight` extra. ModelPreflight keeps provider setup machine-local, gives projects stable groups such as `free_reasoning` and `free_fast`, and checks provider routes before AutoHarness spends a live call.
+For day-to-day testing, start with deterministic fixture manifests and TextArena smoke checks. When a provider-backed path is useful, AutoHarness can run [ModelPreflight](https://github.com/pylit-ai/model-preflight) routes, Gemini CLI, Gemini SDK, OpenRouter, or local candidate modules through manifest `provider` settings. ModelPreflight is the easiest starting point when you want a reusable provider sanity check before committing budget to larger runs.
 
 Recommended path:
 
 1. Use fixture manifests for normal development and CI.
-2. Use `uv sync --extra dev --extra preflight` plus `provider-probe --dry-run` to validate manifest, auth, and budget evidence without generation.
-3. Use ModelPreflight-backed groups for exploratory provider checks; pin the actual provider/model details in run artifacts before treating results as evidence.
+2. Use `uv sync --extra dev --extra preflight` plus `provider-probe` without `--run` to validate manifest, auth, and budget evidence without generation.
+3. Move to a direct provider manifest only after a small canary passes with an isolated artifact root and explicit spend/quota limits.
+
+See [docs/providers.md](docs/providers.md) for provider options, manifest examples, auth modes, and scale-up guidance.
 
 <details>
 <summary><strong>Install Options</strong></summary>
@@ -165,7 +166,7 @@ Provider adapters:
 uv sync --extra dev --extra providers
 ```
 
-model-preflight backed probes:
+[ModelPreflight](https://github.com/pylit-ai/model-preflight)-backed probes:
 
 ```bash
 uv sync --extra dev --extra preflight
@@ -203,6 +204,7 @@ uv build
 - `tests/` - package test suite.
 - `demos/output/` - rendered public demo assets.
 - `docs/demos.md` - demo gallery.
+- `docs/providers.md` - model-provider setup and scaling guide.
 - `docs/architecture/overview.md` - component and data-flow overview.
 - `docs/artifact_policy.md` - tracked source versus generated output policy.
 - `docs/mcp/servers.md` - public MCP server notes.
