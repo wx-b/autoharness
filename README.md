@@ -5,7 +5,7 @@
 [![Package status: alpha](https://img.shields.io/badge/status-alpha-f59e0b)](CHANGELOG.md)
 [![CLI: Typer](https://img.shields.io/badge/cli-Typer-111827)](https://typer.tiangolo.com/)
 
-AutoHarness is a package-first CLI for reproducible action-verifier experiments. It helps researchers and eval engineers turn candidate agent code into auditable evidence: deterministic local runs, benchmark leaderboards, TextArena smoke checks, and guarded provider probes.
+AutoHarness is a package-first CLI for reproducible action-verifier experiments. It helps researchers and eval engineers turn candidate agent code into auditable evidence: deterministic local runs, benchmark leaderboards, TextArena smoke checks, and provider probes that require explicit dry-run, preflight, and budget evidence.
 
 Use it when you need a small harness that can answer:
 
@@ -132,6 +132,18 @@ The package keeps experiment control in manifests and writes artifacts outside s
 
 See [docs/architecture/overview.md](docs/architecture/overview.md) for the component map and [docs/artifact_policy.md](docs/artifact_policy.md) for tracked source versus generated output rules.
 
+## Models and Provider Checks
+
+The paper uses Gemini-2.5-Flash to synthesize harness code and compares resulting agents against larger models such as Gemini-2.5-Pro and GPT-5.2-High. AutoHarness does not bundle those paper experiments or require a specific hosted model for local verification.
+
+For day-to-day testing, start with the deterministic fixture manifests and TextArena smoke checks. When a provider-backed path is useful, AutoHarness uses [ModelPreflight](https://github.com/pylit-ai/model-preflight) through the optional `preflight` extra. ModelPreflight keeps provider setup machine-local, gives projects stable groups such as `free_reasoning` and `free_fast`, and checks provider routes before AutoHarness spends a live call.
+
+Recommended path:
+
+1. Use fixture manifests for normal development and CI.
+2. Use `uv sync --extra dev --extra preflight` plus `provider-probe --dry-run` to validate manifest, auth, and budget evidence without generation.
+3. Use ModelPreflight-backed groups for exploratory provider checks; pin the actual provider/model details in run artifacts before treating results as evidence.
+
 <details>
 <summary><strong>Install Options</strong></summary>
 
@@ -188,7 +200,7 @@ uv build
 
 - `src/autoharness/` - package code and CLI implementation.
 - `manifests/` - committed fixture, TextArena, benchmark, and provider-probe manifests.
-- `tests/` - public package test suite.
+- `tests/` - package test suite.
 - `demos/output/` - rendered public demo assets.
 - `docs/demos.md` - demo gallery.
 - `docs/architecture/overview.md` - component and data-flow overview.
@@ -223,4 +235,4 @@ BibTeX:
 
 ## Status
 
-AutoHarness is alpha software. The current public package is useful for verifier-first development, deterministic toy benchmarks, TextArena smoke checks, and guarded provider-probe plumbing. Paper-faithful critic/search reproduction, broad TextArena coverage, and full harness-as-policy experiments remain research work.
+AutoHarness is alpha software. It is useful for verifier-first development, deterministic toy benchmarks, TextArena smoke checks, and provider probes with preflight and budget evidence. Paper-faithful critic/search reproduction, broad TextArena coverage, and full harness-as-policy experiments remain research work.
