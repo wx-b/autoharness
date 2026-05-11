@@ -1,0 +1,44 @@
+{
+  "status": "small_scale_runtime_complete",
+  "static_artifact_only": false,
+  "fresh_runtime_artifacts_created": true,
+  "search_node_count": 5,
+  "pyl_coverage": {
+    "PYL-610": {
+      "description": "runtime candidate registry promote/list/show/load/export/hash/provenance",
+      "status": "runtime_verified"
+    },
+    "PYL-611": {
+      "description": "versioned rich candidate signature with legacy compatibility",
+      "status": "runtime_verified"
+    },
+    "PYL-612": {
+      "description": "runtime search tree with five hypotheses, parentage, scores, and traces",
+      "status": "runtime_verified"
+    },
+    "PYL-613": {
+      "description": "critic/refiner consumes failure bundle and emits mutation artifact",
+      "status": "runtime_verified"
+    },
+    "PYL-614": {
+      "description": "local sandbox executes allowed candidate and denies adversarial cases",
+      "status": "runtime_verified"
+    },
+    "PYL-615": {
+      "description": "fixed-seed TextArena sweep config and small local POC execution",
+      "status": "runtime_verified"
+    },
+    "PYL-616": {
+      "description": "reward and swapped-order win-rate benchmark with negative control",
+      "status": "runtime_verified"
+    },
+    "PYL-617": {
+      "description": "non-game domain constraints, objectives, metric reducers, reports",
+      "status": "runtime_verified"
+    },
+    "PYL-618": {
+      "description": "end-to-end runtime verifier and public-safe status report",
+      "status": "runtime_verified"
+    }
+  }
+}

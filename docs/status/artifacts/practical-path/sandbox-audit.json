@@ -1,24 +1,82 @@
 {
-  "policy": "static-python-ast-plus-docker-no-network",
+  "policy": "local-python-ast-subprocess-resource-limits",
   "resource_limits": {
-    "memory": "256m",
-    "cpu": "1.0",
-    "timeout_seconds": "5"
+    "memory_bytes": 134217728,
+    "timeout_seconds": 1.0,
+    "output_limit_bytes": 8192
   },
-  "static_denials": [
-    "import os",
-    "subprocess",
-    "socket",
-    "open(..., 'w')",
-    "while True"
-  ],
+  "allowed_candidate": {
+    "case_id": "allowed-generated-candidate",
+    "status": "passed",
+    "reason": "ok",
+    "action": "[1]",
+    "returncode": 0,
+    "stdout_bytes": 17,
+    "stderr": ""
+  },
   "adversarial_cases": {
     "env_read": "denied",
     "filesystem_write": "denied",
     "subprocess": "denied",
     "network": "denied",
-    "infinite_loop": "timeout",
-    "memory_output_abuse": "capped"
+    "infinite_loop": "denied",
+    "memory_output_abuse": "denied"
   },
-  "audit_log_path": "docs/status/artifacts/practical-path/sandbox-audit.json"
+  "adversarial_details": {
+    "env_read": {
+      "case_id": "env_read",
+      "status": "denied",
+      "reason": "denied_import:os",
+      "action": null,
+      "returncode": null,
+      "stdout_bytes": 0,
+      "stderr": ""
+    },
+    "filesystem_write": {
+      "case_id": "filesystem_write",
+      "status": "denied",
+      "reason": "denied_call:open",
+      "action": null,
+      "returncode": null,
+      "stdout_bytes": 0,
+      "stderr": ""
+    },
+    "subprocess": {
+      "case_id": "subprocess",
+      "status": "denied",
+      "reason": "denied_import:subprocess",
+      "action": null,
+      "returncode": null,
+      "stdout_bytes": 0,
+      "stderr": ""
+    },
+    "network": {
+      "case_id": "network",
+      "status": "denied",
+      "reason": "denied_import:socket",
+      "action": null,
+      "returncode": null,
+      "stdout_bytes": 0,
+      "stderr": ""
+    },
+    "infinite_loop": {
+      "case_id": "infinite_loop",
+      "status": "denied",
+      "reason": "timeout",
+      "action": null,
+      "returncode": null,
+      "stdout_bytes": 0,
+      "stderr": ""
+    },
+    "memory_output_abuse": {
+      "case_id": "memory_output_abuse",
+      "status": "denied",
+      "reason": "output_limit",
+      "action": null,
+      "returncode": 0,
+      "stdout_bytes": 100014,
+      "stderr": ""
+    }
+  },
+  "audit_log_path": "docs/status/artifacts/practical-path/sandbox-audit.jsonl"
 }

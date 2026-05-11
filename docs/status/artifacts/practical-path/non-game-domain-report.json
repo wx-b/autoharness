@@ -1,0 +1,126 @@
+{
+  "domain_abstraction": {
+    "supports": [
+      "constraints",
+      "objectives",
+      "metric_reducers",
+      "reports"
+    ],
+    "side_effect_policy": "no live trading, production, or external side effects"
+  },
+  "domains": [
+    {
+      "domain_id": "tests-passing",
+      "constraints": [
+        "no network",
+        "all required checks green"
+      ],
+      "objective_metrics": [
+        "tests_passing",
+        "failure_count"
+      ],
+      "weights": {
+        "tests_passing": 1.0,
+        "failure_count": -1.0
+      }
+    },
+    {
+      "domain_id": "cost-latency",
+      "constraints": [
+        "cost <= 1.0",
+        "latency_ms <= 1000"
+      ],
+      "objective_metrics": [
+        "cost",
+        "latency_ms"
+      ],
+      "weights": {
+        "cost": -0.2,
+        "latency_ms": -0.001
+      }
+    },
+    {
+      "domain_id": "correctness-risk",
+      "constraints": [
+        "correctness >= 0.8",
+        "risk <= 0.2"
+      ],
+      "objective_metrics": [
+        "correctness",
+        "risk"
+      ],
+      "weights": {
+        "correctness": 1.0,
+        "risk": -1.0
+      }
+    },
+    {
+      "domain_id": "synthetic-profit-like",
+      "constraints": [
+        "no live trading",
+        "no external side effects"
+      ],
+      "objective_metrics": [
+        "synthetic_profit",
+        "cost",
+        "latency_ms",
+        "risk"
+      ],
+      "weights": {
+        "synthetic_profit": 1.0,
+        "cost": -0.1,
+        "latency_ms": -0.001,
+        "risk": -0.5
+      }
+    }
+  ],
+  "results": [
+    {
+      "domain_id": "tests-passing",
+      "constraints_satisfied": true,
+      "metrics": {
+        "tests_passing": 1.0,
+        "failure_count": 0.0
+      },
+      "objective_value": 1.0
+    },
+    {
+      "domain_id": "cost-latency",
+      "constraints_satisfied": true,
+      "metrics": {
+        "cost": 0.1,
+        "latency_ms": 35.0
+      },
+      "objective_value": -0.05500000000000001
+    },
+    {
+      "domain_id": "correctness-risk",
+      "constraints_satisfied": true,
+      "metrics": {
+        "correctness": 0.95,
+        "risk": 0.05
+      },
+      "objective_value": 0.8999999999999999
+    },
+    {
+      "domain_id": "synthetic-profit-like",
+      "constraints_satisfied": true,
+      "metrics": {
+        "synthetic_profit": 1.2,
+        "cost": 0.2,
+        "latency_ms": 40.0,
+        "risk": 0.1
+      },
+      "objective_value": 1.0899999999999999
+    }
+  ],
+  "objective_metrics": [
+    "correctness",
+    "cost",
+    "failure_count",
+    "latency_ms",
+    "risk",
+    "synthetic_profit",
+    "tests_passing"
+  ]
+}

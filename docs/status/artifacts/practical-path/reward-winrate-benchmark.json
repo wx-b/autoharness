@@ -1,8 +1,26 @@
 {
-  "candidate_id": "generated-ddf9cef87541",
+  "primary_metric": "reward_delta_and_win_rate",
   "baseline_id": "first-listed-action",
-  "legal_action_rate_delta": 0.0,
-  "reward_delta": 0.0,
-  "win_rate_delta": 0.0,
+  "candidate_id": "runtime-generated",
+  "one_player_reward_poc": {
+    "candidate_reward": 2.5,
+    "baseline_reward": 1.0,
+    "reward_delta": 1.5
+  },
+  "two_player_swapped_order_poc": {
+    "orders": [
+      "candidate_first",
+      "candidate_second"
+    ],
+    "candidate_win_rate": 0.6666666666666666,
+    "baseline_win_rate": 0.3333333333333333,
+    "win_rate_delta": 0.3333333333333333
+  },
+  "negative_control": {
+    "name": "legality_only_no_reward_lift",
+    "legal_action_rate_delta": 1.0,
+    "reward_delta": 0.0,
+    "reported_as_no_quality_lift": true
+  },
   "swapped_order_2p_poc": true
 }

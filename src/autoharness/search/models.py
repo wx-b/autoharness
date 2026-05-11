@@ -1,12 +1,19 @@
 from __future__ import annotations
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class SearchNode(BaseModel):
     node_id: str
     candidate_hash: str
     parent_id: str | None = None
+    candidate_id: str | None = None
+    mutation_family: str = "seed"
+    selected_rationale: str = ""
+    raw_trace_links: list[str] = Field(default_factory=list)
+    controller_state: dict[str, object] = Field(default_factory=dict)
+    node_scores: dict[str, float] = Field(default_factory=dict)
+    recomputable_metrics: dict[str, float] = Field(default_factory=dict)
     legal_actions: int = 0
     illegal_actions: int = 0
     reward_total: float = 0.0

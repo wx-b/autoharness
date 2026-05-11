@@ -1,34 +1,162 @@
 [
   {
     "node_id": "root",
+    "candidate_hash": "d937f67a1f87864a0d7577938662de594f0d7d66abe7c53d351f8655d7c8e8db",
     "parent_id": null,
-    "candidate_id": "generated-ddf9cef87541",
+    "candidate_id": "runtime-d937f67a1f87",
     "mutation_family": "seed",
-    "node_scores": {
-      "posterior_mean": 0.75,
-      "thompson_sample": 0.75
+    "selected_rationale": "seed baseline",
+    "raw_trace_links": [
+      "docs/status/artifacts/practical-path/sandbox-audit.jsonl"
+    ],
+    "controller_state": {
+      "controller": "beta_thompson",
+      "seed": 7,
+      "iteration": 0
     },
-    "selected_rationale": "Root candidate establishes backward-compatible propose_action behavior.",
+    "node_scores": {
+      "posterior_mean": 0.6,
+      "ablation_score": 0.6566666666666666,
+      "legality_rate": 0.6666666666666666
+    },
+    "recomputable_metrics": {
+      "legal_actions": 2.0,
+      "illegal_actions": 1.0,
+      "total_reward": 0.0
+    },
+    "legal_actions": 2,
+    "illegal_actions": 1,
+    "reward_total": 0.0,
+    "exception_count": 0,
+    "latency_ms": 10.0,
+    "novelty_bonus": 0.0
+  },
+  {
+    "node_id": "node-001",
+    "candidate_hash": "d937f67a1f87864a0d7577938662de594f0d7d66abe7c53d351f8655d7c8e8db",
+    "parent_id": "root",
+    "candidate_id": "runtime-d937f67a1f87",
+    "mutation_family": "parser_repair",
+    "selected_rationale": "selected runtime hypothesis for parser_repair",
+    "raw_trace_links": [
+      "docs/status/artifacts/practical-path/sandbox-audit.jsonl"
+    ],
+    "controller_state": {
+      "controller": "beta_thompson",
+      "seed": 7,
+      "iteration": 1
+    },
+    "node_scores": {
+      "posterior_mean": 0.8,
+      "ablation_score": 0.989,
+      "legality_rate": 1.0
+    },
     "recomputable_metrics": {
       "legal_actions": 3.0,
       "illegal_actions": 0.0,
-      "total_reward": 3.0
-    }
+      "total_reward": 1.0
+    },
+    "legal_actions": 3,
+    "illegal_actions": 0,
+    "reward_total": 1.0,
+    "exception_count": 0,
+    "latency_ms": 11.0,
+    "novelty_bonus": 0.1
   },
   {
-    "node_id": "parser-fix-001",
-    "parent_id": "root",
-    "candidate_id": "generated-ddf9cef87541",
-    "mutation_family": "parser_repair",
-    "node_scores": {
-      "posterior_mean": 0.8,
-      "thompson_sample": 0.82
+    "node_id": "node-002",
+    "candidate_hash": "d937f67a1f87864a0d7577938662de594f0d7d66abe7c53d351f8655d7c8e8db",
+    "parent_id": "node-001",
+    "candidate_id": "runtime-d937f67a1f87",
+    "mutation_family": "retry_guard",
+    "selected_rationale": "selected runtime hypothesis for retry_guard",
+    "raw_trace_links": [
+      "docs/status/artifacts/practical-path/sandbox-audit.jsonl"
+    ],
+    "controller_state": {
+      "controller": "beta_thompson",
+      "seed": 7,
+      "iteration": 2
     },
-    "selected_rationale": "Selected by Thompson-style score after parser failures.",
+    "node_scores": {
+      "posterior_mean": 0.8333333333333334,
+      "ablation_score": 0.988,
+      "legality_rate": 1.0
+    },
     "recomputable_metrics": {
       "legal_actions": 4.0,
       "illegal_actions": 0.0,
+      "total_reward": 2.0
+    },
+    "legal_actions": 4,
+    "illegal_actions": 0,
+    "reward_total": 2.0,
+    "exception_count": 0,
+    "latency_ms": 12.0,
+    "novelty_bonus": 0.2
+  },
+  {
+    "node_id": "node-003",
+    "candidate_hash": "d937f67a1f87864a0d7577938662de594f0d7d66abe7c53d351f8655d7c8e8db",
+    "parent_id": "node-002",
+    "candidate_id": "runtime-d937f67a1f87",
+    "mutation_family": "reward_probe",
+    "selected_rationale": "selected runtime hypothesis for reward_probe",
+    "raw_trace_links": [
+      "docs/status/artifacts/practical-path/sandbox-audit.jsonl"
+    ],
+    "controller_state": {
+      "controller": "beta_thompson",
+      "seed": 7,
+      "iteration": 3
+    },
+    "node_scores": {
+      "posterior_mean": 0.8571428571428571,
+      "ablation_score": 0.987,
+      "legality_rate": 1.0
+    },
+    "recomputable_metrics": {
+      "legal_actions": 5.0,
+      "illegal_actions": 0.0,
+      "total_reward": 3.0
+    },
+    "legal_actions": 5,
+    "illegal_actions": 0,
+    "reward_total": 3.0,
+    "exception_count": 0,
+    "latency_ms": 13.0,
+    "novelty_bonus": 0.30000000000000004
+  },
+  {
+    "node_id": "node-004",
+    "candidate_hash": "d937f67a1f87864a0d7577938662de594f0d7d66abe7c53d351f8655d7c8e8db",
+    "parent_id": "node-003",
+    "candidate_id": "runtime-d937f67a1f87",
+    "mutation_family": "non_game_probe",
+    "selected_rationale": "selected runtime hypothesis for non_game_probe",
+    "raw_trace_links": [
+      "docs/status/artifacts/practical-path/sandbox-audit.jsonl"
+    ],
+    "controller_state": {
+      "controller": "beta_thompson",
+      "seed": 7,
+      "iteration": 4
+    },
+    "node_scores": {
+      "posterior_mean": 0.875,
+      "ablation_score": 0.986,
+      "legality_rate": 1.0
+    },
+    "recomputable_metrics": {
+      "legal_actions": 6.0,
+      "illegal_actions": 0.0,
       "total_reward": 4.0
-    }
+    },
+    "legal_actions": 6,
+    "illegal_actions": 0,
+    "reward_total": 4.0,
+    "exception_count": 0,
+    "latency_ms": 14.0,
+    "novelty_bonus": 0.4
   }
 ]

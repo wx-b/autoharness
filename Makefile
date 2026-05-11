@@ -1,4 +1,4 @@
-.PHONY: setup dev test lint typecheck verify preflight-dry-run preflight-dev-test verify-practical-path
+.PHONY: setup dev test lint typecheck verify preflight-dry-run preflight-dev-test verify-practical-path verify-practical-path-runtime
 VERIFY_ARTIFACT_ROOT ?= tmp/verify-artifacts
 PREFLIGHT_MANIFEST ?= manifests/provider_probe_model_preflight_free.yaml
 PREFLIGHT_ARTIFACT_ROOT ?= tmp/provider-probes/model-preflight-dev
@@ -38,3 +38,8 @@ preflight-dev-test:
 verify-practical-path:
 	uv run python scripts/verify_practical_path.py
 	uv run pytest tests/practical tests/search tests/artifacts tests/refinement tests/providers tests/benchmarking tests/sandbox -q
+
+verify-practical-path-runtime:
+	tmp_dir="$$(mktemp -d)"; \
+	uv run python scripts/verify_practical_path.py --artifact-root "$$tmp_dir/practical-path" --status-report "$$tmp_dir/status.md"; \
+	rm -rf "$$tmp_dir"

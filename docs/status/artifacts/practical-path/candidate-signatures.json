@@ -1,17 +1,31 @@
 [
   {
-    "candidate_id": "generated-ddf9cef87541",
-    "path": "tests/fixtures/candidates/ttt_first_available.py",
-    "source_sha256": "ddf9cef8754104ac418898802f90a65330ceb692c6990e52dcea04cd91d323f0",
+    "contract_version": "2",
+    "candidate_id": "runtime-d937f67a1f87",
+    "path": "runtime-d937f67a1f87.py",
+    "source_sha256": "d937f67a1f87864a0d7577938662de594f0d7d66abe7c53d351f8655d7c8e8db",
     "domain": "textarena",
     "entrypoints": [
+      "explain_decision",
+      "is_legal_action",
+      "legal_actions",
+      "parse_state",
       "propose_action",
-      "is_legal_action"
+      "score_action"
     ],
     "compatible_entrypoint": "propose_action",
+    "rich_entrypoints": [
+      "parse_state",
+      "legal_actions",
+      "score_action",
+      "propose_action",
+      "explain_decision"
+    ],
+    "supports_legacy_action_verifier": true,
     "accepted_observation_shapes": [
-      "TextArena observation with Legal Actions/Available Actions",
-      "fixture observation with explicit valid_actions"
+      "TextArena observation with Available Moves/Legal Actions",
+      "fixture observation with explicit valid_actions",
+      "non-game observation dictionaries with constraints and metrics"
     ],
     "output_contract": "single legal action string"
   }

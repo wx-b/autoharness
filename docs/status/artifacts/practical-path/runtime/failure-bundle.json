@@ -1,0 +1,27 @@
+{
+  "run_id": "practical-path-runtime-failure-001",
+  "reason": "illegal-action-exhausted",
+  "observation": "Available Moves: [0], [1], [2]\n[Player 0] [0]\nAvailable Moves: [1], [2]",
+  "attempts": [
+    "[0]",
+    "[0]"
+  ],
+  "current_legal_actions": [
+    "[1]",
+    "[2]"
+  ],
+  "failure_type": null,
+  "env_feedback": {},
+  "prior_attempts_summary": [
+    {
+      "attempt_index": 0,
+      "action": "[0]",
+      "legal": false
+    },
+    {
+      "attempt_index": 1,
+      "action": "[0]",
+      "legal": false
+    }
+  ]
+}

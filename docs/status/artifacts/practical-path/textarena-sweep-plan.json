@@ -1,13 +1,42 @@
 {
-  "env_id": "TicTacToe-v0",
+  "env_ids": [
+    "TicTacToe-v0"
+  ],
   "seeds": [
     7,
     11
   ],
+  "candidates": [
+    "runtime-d937f67a1f87"
+  ],
   "parallel_envs": 10,
   "rollout_steps": 1000,
+  "retry_policy": {
+    "max_retries": 1,
+    "fallback": "fail-closed"
+  },
+  "artifact_root": "fresh-runtime-artifact-root",
   "verified_small_run": {
     "parallel_envs": 2,
-    "rollout_steps": 4
+    "rollout_steps": 4,
+    "executed": true,
+    "results": [
+      {
+        "env_id": "TicTacToe-v0",
+        "seed": 7,
+        "steps_executed": 4,
+        "candidate_id": "runtime-d937f67a1f87",
+        "final_action": "[1]",
+        "status": "passed"
+      },
+      {
+        "env_id": "TicTacToe-v0",
+        "seed": 11,
+        "steps_executed": 4,
+        "candidate_id": "runtime-d937f67a1f87",
+        "final_action": "[1]",
+        "status": "passed"
+      }
+    ]
   }
 }

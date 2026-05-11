@@ -1,0 +1,55 @@
+{
+  "failure_taxonomy": [
+    "illegal_move",
+    "stale_bad_parser",
+    "format_error",
+    "repeated_invalid_action",
+    "weak_strategy",
+    "reward_regression",
+    "timeout",
+    "sandbox_violation",
+    "unknown"
+  ],
+  "runtime_failure_consumed": {
+    "run_id": "practical-path-runtime-failure-001",
+    "reason": "illegal-action-exhausted",
+    "observation": "Available Moves: [0], [1], [2]\n[Player 0] [0]\nAvailable Moves: [1], [2]",
+    "attempts": [
+      "[0]",
+      "[0]"
+    ],
+    "current_legal_actions": [
+      "[1]",
+      "[2]"
+    ],
+    "failure_type": null,
+    "env_feedback": {},
+    "prior_attempts_summary": [
+      {
+        "attempt_index": 0,
+        "action": "[0]",
+        "legal": false
+      },
+      {
+        "attempt_index": 1,
+        "action": "[0]",
+        "legal": false
+      }
+    ]
+  },
+  "mutation_artifact_path": "docs/status/artifacts/practical-path/mutation-artifact.json",
+  "critic_summary": {
+    "run_id": "practical-path-runtime-failure-001",
+    "failure_type": "repeated_invalid",
+    "root_cause": "Candidate repeated the same illegal action instead of adapting to benchmark feedback.",
+    "current_legal_actions": [
+      "[1]",
+      "[2]"
+    ],
+    "attempts": [
+      "[0]",
+      "[0]"
+    ],
+    "recommended_change": "Consume the retry warning and re-parse the current legal action set before retrying."
+  }
+}

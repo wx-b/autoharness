@@ -180,6 +180,14 @@ textarena = [
     { name = "textarena" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "mypy" },
+    { name = "pytest" },
+    { name = "ruff" },
+    { name = "types-pyyaml" },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "google-genai", marker = "extra == 'providers'", specifier = ">=1.36,<2" },
@@ -194,6 +202,14 @@ requires-dist = [
     { name = "types-pyyaml", marker = "extra == 'dev'", specifier = ">=6.0.12,<7" },
 ]
 provides-extras = ["dev", "providers", "preflight", "textarena"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "mypy", specifier = ">=1.17,<2" },
+    { name = "pytest", specifier = ">=8.4,<9" },
+    { name = "ruff", specifier = ">=0.12,<1" },
+    { name = "types-pyyaml", specifier = ">=6.0.12,<7" },
+]
 
 [[package]]
 name = "certifi"

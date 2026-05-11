@@ -46,6 +46,17 @@ autoharness = "autoharness.__main__:main"
 requires = ["hatchling>=1.27,<2"]
 build-backend = "hatchling.build"
 
+[dependency-groups]
+dev = [
+  "mypy>=1.17,<2",
+  "pytest>=8.4,<9",
+  "ruff>=0.12,<1",
+  "types-PyYAML>=6.0.12,<7",
+]
+
+[tool.uv]
+default-groups = ["dev"]
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/autoharness"]
 

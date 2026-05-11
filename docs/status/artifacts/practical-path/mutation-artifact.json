@@ -1,0 +1,37 @@
+{
+  "parent_node": "root",
+  "parent_candidate_hash": "ec400fd48931a5d705a20adeb855c96cb51d955ce281cf5c979b2ca75870c12e",
+  "failure_bundle_path": "docs/status/artifacts/practical-path/runtime/failure-bundle.json",
+  "critic_summary": {
+    "run_id": "practical-path-runtime-failure-001",
+    "failure_type": "repeated_invalid",
+    "root_cause": "Candidate repeated the same illegal action instead of adapting to benchmark feedback.",
+    "current_legal_actions": [
+      "[1]",
+      "[2]"
+    ],
+    "attempts": [
+      "[0]",
+      "[0]"
+    ],
+    "recommended_change": "Consume the retry warning and re-parse the current legal action set before retrying."
+  },
+  "mutation_plan": {
+    "summary": "Use the latest available moves block and emit exactly one action from the latest legal action set.",
+    "prompt": "You are planning the next patch for an action-verifier candidate.\nFailure type: repeated_invalid\nRoot cause: Candidate repeated the same illegal action instead of adapting to benchmark feedback.\nCurrent legal actions: [1], [2]\nFailed attempts: [0], [0]\nReturn a concise patch plan that fixes the observed failure.",
+    "provider": "fixture",
+    "model": "fixture-model"
+  },
+  "mutation_family": "latest_available_moves",
+  "produced_candidate_path": "docs/status/artifacts/practical-path/runtime/generated-candidate-mutated.py",
+  "produced_candidate_sha256": "d937f67a1f87864a0d7577938662de594f0d7d66abe7c53d351f8655d7c8e8db",
+  "precheck_result": {
+    "case_id": "allowed-generated-candidate",
+    "status": "passed",
+    "reason": "ok",
+    "action": "[1]",
+    "returncode": 0,
+    "stdout_bytes": 17,
+    "stderr": ""
+  }
+}
