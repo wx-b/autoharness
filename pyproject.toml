@@ -1,6 +1,6 @@
 [project]
 name = "autoharness"
-version = "0.1.2"
+version = "0.1.4"
 description = "Package-first AutoHarness action-verifier reproduction scaffold"
 readme = "README.md"
 requires-python = ">=3.12"
