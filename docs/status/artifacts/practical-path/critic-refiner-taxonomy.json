@@ -1,0 +1,65 @@
+[
+  {
+    "iteration": 1,
+    "failure_type": "illegal_move",
+    "mutation_family": "policy_guard",
+    "failure_summary": "illegal_move classified by deterministic taxonomy.",
+    "patch_rationale": "Mutation family selected from failure type and patch summary."
+  },
+  {
+    "iteration": 2,
+    "failure_type": "stale_bad_parser",
+    "mutation_family": "parser_repair",
+    "failure_summary": "stale_bad_parser classified by deterministic taxonomy.",
+    "patch_rationale": "Mutation family selected from failure type and patch summary."
+  },
+  {
+    "iteration": 3,
+    "failure_type": "format_error",
+    "mutation_family": "policy_guard",
+    "failure_summary": "format_error classified by deterministic taxonomy.",
+    "patch_rationale": "Mutation family selected from failure type and patch summary."
+  },
+  {
+    "iteration": 4,
+    "failure_type": "repeated_invalid_action",
+    "mutation_family": "policy_guard",
+    "failure_summary": "repeated_invalid_action classified by deterministic taxonomy.",
+    "patch_rationale": "Mutation family selected from failure type and patch summary."
+  },
+  {
+    "iteration": 5,
+    "failure_type": "weak_strategy",
+    "mutation_family": "policy_guard",
+    "failure_summary": "weak_strategy classified by deterministic taxonomy.",
+    "patch_rationale": "Mutation family selected from failure type and patch summary."
+  },
+  {
+    "iteration": 6,
+    "failure_type": "reward_regression",
+    "mutation_family": "policy_guard",
+    "failure_summary": "reward_regression classified by deterministic taxonomy.",
+    "patch_rationale": "Mutation family selected from failure type and patch summary."
+  },
+  {
+    "iteration": 7,
+    "failure_type": "timeout",
+    "mutation_family": "policy_guard",
+    "failure_summary": "timeout classified by deterministic taxonomy.",
+    "patch_rationale": "Mutation family selected from failure type and patch summary."
+  },
+  {
+    "iteration": 8,
+    "failure_type": "sandbox_violation",
+    "mutation_family": "policy_guard",
+    "failure_summary": "sandbox_violation classified by deterministic taxonomy.",
+    "patch_rationale": "Mutation family selected from failure type and patch summary."
+  },
+  {
+    "iteration": 9,
+    "failure_type": "unknown",
+    "mutation_family": "policy_guard",
+    "failure_summary": "unknown classified by deterministic taxonomy.",
+    "patch_rationale": "Mutation family selected from failure type and patch summary."
+  }
+]

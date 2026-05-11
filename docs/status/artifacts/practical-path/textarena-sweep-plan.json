@@ -1,0 +1,13 @@
+{
+  "env_id": "TicTacToe-v0",
+  "seeds": [
+    7,
+    11
+  ],
+  "parallel_envs": 10,
+  "rollout_steps": 1000,
+  "verified_small_run": {
+    "parallel_envs": 2,
+    "rollout_steps": 4
+  }
+}

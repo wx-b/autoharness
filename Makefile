@@ -1,4 +1,4 @@
-.PHONY: setup dev test lint typecheck verify preflight-dry-run preflight-dev-test
+.PHONY: setup dev test lint typecheck verify preflight-dry-run preflight-dev-test verify-practical-path
 VERIFY_ARTIFACT_ROOT ?= tmp/verify-artifacts
 PREFLIGHT_MANIFEST ?= manifests/provider_probe_model_preflight_free.yaml
 PREFLIGHT_ARTIFACT_ROOT ?= tmp/provider-probes/model-preflight-dev
@@ -34,3 +34,7 @@ preflight-dry-run:
 
 preflight-dev-test:
 	uv run --extra dev --extra textarena --extra preflight python -m autoharness provider-probe --manifest $(PREFLIGHT_MANIFEST) --artifact-root $(PREFLIGHT_ARTIFACT_ROOT) --max-spend-usd $(PREFLIGHT_MAX_SPEND_USD) --usage-policy allow-missing-once --run
+
+verify-practical-path:
+	uv run python scripts/verify_practical_path.py
+	uv run pytest tests/practical tests/search tests/artifacts tests/refinement tests/providers tests/benchmarking tests/sandbox -q

@@ -1,0 +1,34 @@
+[
+  {
+    "node_id": "root",
+    "parent_id": null,
+    "candidate_id": "generated-ddf9cef87541",
+    "mutation_family": "seed",
+    "node_scores": {
+      "posterior_mean": 0.75,
+      "thompson_sample": 0.75
+    },
+    "selected_rationale": "Root candidate establishes backward-compatible propose_action behavior.",
+    "recomputable_metrics": {
+      "legal_actions": 3.0,
+      "illegal_actions": 0.0,
+      "total_reward": 3.0
+    }
+  },
+  {
+    "node_id": "parser-fix-001",
+    "parent_id": "root",
+    "candidate_id": "generated-ddf9cef87541",
+    "mutation_family": "parser_repair",
+    "node_scores": {
+      "posterior_mean": 0.8,
+      "thompson_sample": 0.82
+    },
+    "selected_rationale": "Selected by Thompson-style score after parser failures.",
+    "recomputable_metrics": {
+      "legal_actions": 4.0,
+      "illegal_actions": 0.0,
+      "total_reward": 4.0
+    }
+  }
+]

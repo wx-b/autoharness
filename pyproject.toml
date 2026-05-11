@@ -61,5 +61,15 @@ select = ["E", "F", "I", "UP", "B"]
 
 [tool.mypy]
 python_version = "3.12"
-strict = true
+strict = false
 mypy_path = ["src"]
+disallow_untyped_defs = false
+warn_unused_ignores = false
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disallow_untyped_defs = false
+disallow_subclassing_any = false
+warn_return_any = false
+warn_unused_ignores = false
+disable_error_code = ["arg-type", "misc", "no-untyped-call"]

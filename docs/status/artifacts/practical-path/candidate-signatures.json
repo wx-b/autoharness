@@ -1,0 +1,18 @@
+[
+  {
+    "candidate_id": "generated-ddf9cef87541",
+    "path": "tests/fixtures/candidates/ttt_first_available.py",
+    "source_sha256": "ddf9cef8754104ac418898802f90a65330ceb692c6990e52dcea04cd91d323f0",
+    "domain": "textarena",
+    "entrypoints": [
+      "propose_action",
+      "is_legal_action"
+    ],
+    "compatible_entrypoint": "propose_action",
+    "accepted_observation_shapes": [
+      "TextArena observation with Legal Actions/Available Actions",
+      "fixture observation with explicit valid_actions"
+    ],
+    "output_contract": "single legal action string"
+  }
+]

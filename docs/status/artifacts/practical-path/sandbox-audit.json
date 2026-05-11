@@ -1,0 +1,24 @@
+{
+  "policy": "static-python-ast-plus-docker-no-network",
+  "resource_limits": {
+    "memory": "256m",
+    "cpu": "1.0",
+    "timeout_seconds": "5"
+  },
+  "static_denials": [
+    "import os",
+    "subprocess",
+    "socket",
+    "open(..., 'w')",
+    "while True"
+  ],
+  "adversarial_cases": {
+    "env_read": "denied",
+    "filesystem_write": "denied",
+    "subprocess": "denied",
+    "network": "denied",
+    "infinite_loop": "timeout",
+    "memory_output_abuse": "capped"
+  },
+  "audit_log_path": "docs/status/artifacts/practical-path/sandbox-audit.json"
+}

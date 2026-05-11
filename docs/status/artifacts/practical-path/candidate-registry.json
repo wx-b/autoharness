@@ -1,0 +1,14 @@
+[
+  {
+    "registry_version": "1",
+    "candidate_id": "generated-ddf9cef87541",
+    "promoted_from": "tests/fixtures/candidates/ttt_first_available.py",
+    "promoted_to": "registry/generated-ddf9cef87541.py",
+    "source_sha256": "ddf9cef8754104ac418898802f90a65330ceb692c6990e52dcea04cd91d323f0",
+    "rationale": "Promoted because the practical verifier exercises signature, search, sandbox, sweep, benchmark, and non-game evidence contracts.",
+    "minimum_metrics": {
+      "legal_action_rate": 1.0,
+      "reward_delta": 0.0
+    }
+  }
+]
