@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.6
+
+- Adds practical runtime usage coverage to the README and API guide.
+- Adds a PYL-632 paper-scale protocol smoke verifier that preserves the 145-game, 16 one-player, 16 two-player, and 10-env/1000-step targets without running costly full benchmarks.
+- Aligns the package runtime version with the public release version.
+
 ## 0.1.2
 
 - Updates the README hero to use the Othello gameplay proof recording.

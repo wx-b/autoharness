@@ -46,6 +46,8 @@ ls tmp/verify-artifacts/offline-smoke
 - TextArena smoke manifests for checking real environment integration.
 - Provider probe commands with dry-run, preflight, and budget evidence before live calls.
 - Structured JSON artifacts for legality, reward, retries, failure bundles, and summaries.
+- A practical runtime path that promotes generated candidates into a versioned registry, records rich signatures, persists a candidate search tree, and runs critic/refiner and sandbox evidence.
+- A paper-scale protocol smoke check for the deferred 145-game and 16/16 evaluation targets without running costly full benchmarks.
 - A small Python package surface that is easy to test, inspect, and extend.
 
 ## Common Workflows
@@ -76,6 +78,24 @@ uv run autoharness campaign \
   --max-iterations 1
 # Campaign converged: .../tests/fixtures/candidates/ttt_latest_move_parser.py (.../campaign-summary.json)
 ```
+
+Verify the practical runtime path:
+
+```bash
+make verify-practical-path-runtime
+# practical path runtime verified
+```
+
+This uses a temporary artifact root and exercises the runtime candidate registry, rich candidate contract, search tree, critic/refiner mutation, sandbox policy, fixed-seed TextArena sweep POC, reward/win-rate benchmark POC, and non-game objective evaluator.
+
+Smoke-test the deferred paper-scale protocol without running the costly benchmark:
+
+```bash
+make verify-paper-scale-smoke
+# paper-scale protocol smoke verified
+```
+
+The smoke verifier preserves the 145-game legality target, 16 one-player and 16 two-player evaluation targets, and 10-parallel-env/1000-step rollout target while confirming `full_benchmark_executed=false`.
 
 Dry-run a provider probe before any live call:
 
@@ -121,15 +141,18 @@ The trace replays a real TextArena TicTacToe run and leaves the machine-checkabl
 ```text
 manifest.yaml
   -> candidate provider
+  -> candidate registry and rich signature contract
   -> benchmark suite
   -> action verifier
+  -> critic/refiner and search controller
+  -> generated-code sandbox
   -> artifact store
   -> JSON summaries, traces, leaderboards, provider evidence
 ```
 
 The package keeps experiment control in manifests and writes artifacts outside source by default. Verifier logic is deterministic for local fixtures; provider-backed paths require explicit preflight and budget evidence.
 
-See [docs/architecture/overview.md](docs/architecture/overview.md) for the component map and [docs/artifact_policy.md](docs/artifact_policy.md) for tracked source versus generated output rules.
+See [docs/practical_runtime.md](docs/practical_runtime.md) for practical runtime API examples, [docs/architecture/overview.md](docs/architecture/overview.md) for the component map, and [docs/artifact_policy.md](docs/artifact_policy.md) for tracked source versus generated output rules.
 
 ## Models and Provider Checks
 
@@ -204,6 +227,7 @@ uv build
 - `tests/` - package test suite.
 - `demos/output/` - rendered public demo assets.
 - `docs/demos.md` - demo gallery.
+- `docs/practical_runtime.md` - practical runtime CLI and Python API guide.
 - `docs/providers.md` - model-provider setup and scaling guide.
 - `docs/architecture/overview.md` - component and data-flow overview.
 - `docs/artifact_policy.md` - tracked source versus generated output policy.
@@ -237,4 +261,4 @@ BibTeX:
 
 ## Status
 
-AutoHarness is alpha software. It is useful for verifier-first development, deterministic toy benchmarks, TextArena smoke checks, and provider probes with preflight and budget evidence. Paper-faithful critic/search reproduction, broad TextArena coverage, and full harness-as-policy experiments remain research work.
+AutoHarness is alpha software. It is useful for verifier-first development, deterministic toy benchmarks, TextArena smoke checks, provider probes with preflight and budget evidence, and a small-scale practical runtime path with durable candidate, search, critic/refiner, sandbox, reward, and non-game evidence. Paper-scale benchmark execution remains deferred: the PYL-632 smoke protocol is implemented, but the full 145-game and 16/16 evaluation runs are not executed by default.

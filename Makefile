@@ -1,4 +1,4 @@
-.PHONY: setup dev test lint typecheck verify preflight-dry-run preflight-dev-test verify-practical-path verify-practical-path-runtime
+.PHONY: setup dev test lint typecheck verify preflight-dry-run preflight-dev-test verify-practical-path verify-practical-path-runtime verify-paper-scale-smoke
 VERIFY_ARTIFACT_ROOT ?= tmp/verify-artifacts
 PREFLIGHT_MANIFEST ?= manifests/provider_probe_model_preflight_free.yaml
 PREFLIGHT_ARTIFACT_ROOT ?= tmp/provider-probes/model-preflight-dev
@@ -42,4 +42,9 @@ verify-practical-path:
 verify-practical-path-runtime:
 	tmp_dir="$$(mktemp -d)"; \
 	uv run python scripts/verify_practical_path.py --artifact-root "$$tmp_dir/practical-path" --status-report "$$tmp_dir/status.md"; \
+	rm -rf "$$tmp_dir"
+
+verify-paper-scale-smoke:
+	tmp_dir="$$(mktemp -d)"; \
+	uv run python scripts/verify_paper_scale_protocol.py --artifact-root "$$tmp_dir/paper-scale" --status-report "$$tmp_dir/status.md"; \
 	rm -rf "$$tmp_dir"

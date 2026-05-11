@@ -1,0 +1,52 @@
+{
+  "issue_id": "PYL-632",
+  "status": "smoke_verified_full_run_deferred",
+  "full_benchmark_executed": false,
+  "target": {
+    "legality_game_count": 145,
+    "end_to_end_one_player_games": 16,
+    "end_to_end_two_player_games": 16,
+    "parallel_envs": 10,
+    "rollout_steps": 1000,
+    "fixed_seeds": [
+      7,
+      11,
+      13,
+      17,
+      19
+    ],
+    "two_player_ordering": "swap player order and aggregate by candidate"
+  },
+  "smoke_run": {
+    "executed": true,
+    "full_benchmark_executed": false,
+    "legality_smoke_games": [
+      "TicTacToe-v0",
+      "Othello-v0",
+      "PigDice-v0"
+    ],
+    "one_player_smoke_games": [
+      "PigDice-v0"
+    ],
+    "two_player_smoke_games": [
+      "TicTacToe-v0",
+      "Othello-v0"
+    ],
+    "smoke_steps_per_env": 4,
+    "validated_surfaces": [
+      "paper-scale target counts",
+      "fixed seed schedule",
+      "10-parallel-env 1000-step rollout training protocol",
+      "one-player and two-player protocol split",
+      "swapped-order two-player evaluation requirement",
+      "compute guard preventing accidental full benchmark execution"
+    ]
+  },
+  "acceptance_criteria": [
+    "The protocol represents the 145-game legality benchmark target.",
+    "The protocol represents the 16 one-player and 16 two-player evaluation target.",
+    "The protocol preserves the 10-parallel-env, 1000-step rollout training target.",
+    "The smoke verifier executes without running paper-scale benchmarks.",
+    "The smoke verifier writes durable public-safe evidence."
+  ]
+}
